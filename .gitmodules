@@ -1,0 +1,3 @@
+[submodule "lib/pdoc"]
+	path = lib/pdoc
+	url = git://github.com/tobie/pdoc.git
