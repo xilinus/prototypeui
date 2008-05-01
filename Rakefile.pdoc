@@ -1,9 +1,18 @@
 load 'Rakefile'
 
 desc "Create HTML documentation using pdoc"
-task :pdoc => :dist do
+task :pdoc  do
   require 'lib/pdoc'                                                                          
   FileUtils.rm_rf "pdoc"
   FileUtils.mkdir "pdoc"
-  PDoc::Generators::Html::Website.new(File.expand_path(File.join(File.dirname(__FILE__), "lib", "pdoc_template", "pdoc.js"))).render
+  tmp_filename = File.join(File.dirname(__FILE__), 'pdoc', 'all.pdoc')
+  open(tmp_filename, 'w') do |f|
+    Dir[File.join(File.dirname(__FILE__), "src", "**", "*.pdoc")].each do |file|
+      puts file
+      f << File.read(file)
+    end
+  end
+  PDoc::Runner.new(tmp_filename).run
+  
+  FileUtils.rm tmp_filename
 end     

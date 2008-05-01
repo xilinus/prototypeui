@@ -225,8 +225,9 @@ pre code {
 
 #sidebar {
 	font-size: 0.875em;
-	width: 220px;
+	width: 200px;
 	float: left;
+	margin-right: 20px;
 }
 
 #sidebar ul {

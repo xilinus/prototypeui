@@ -23,16 +23,15 @@
       </div>
 	</div>
 	<div id="search_panel">
-	 	<form action="" method="get" accept-charset="utf-8">
-			<div><input type="text" value="search" id="search"></div>
-			<div id="search_list"></div>
-		</form>
+    <!-- <form action="" method="get" accept-charset="utf-8">
+      <div><input type="text" value="search" id="search"></div>
+      <div id="search_list"></div>
+    </form> -->
 	</div>
 	<div id="main">
 		<div id="sidebar">
 			<ul>         
 			  <h2>Prototype UI</h2>
-			  <h3><%= PUI_DOC_VERSION %></h3>
 				<% @root.sections.each do |section| %>
 					<%= menu(section) %>
 				<% end %>
@@ -43,7 +42,7 @@
 		</div>
 	</div>
 	<div id="footer">
-		<p>&copy; 2006-<%= Time.now.year %> Prototype Core Team | Licenses:
+		<p>&copy; 2007-<%= Time.now.year %> Prototype UI | Licenses:
 		<a rel="license" href="http://dev.rubyonrails.org/browser/spinoffs/prototype/trunk/LICENSE?format=raw">MIT (source code)</a> and <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><abbr title="Creative Commons Attribution-Share Alike 3.0 License">CC BY-SA</abbr> (documentation)</a>.</p>
 	</div>
 </body>

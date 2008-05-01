@@ -10,7 +10,7 @@ VENDOR_DIR    = File.expand_path(File.join(PDOC_DIR, "..",    "vendor"))
   $:.unshift File.expand_path(c)
 end
     
-PUI_DOC_VERSION = `svnversion`
 require 'erb' 
+require File.expand_path(File.join(PDOC_DIR, "pdoc", "runner"))
 require File.expand_path(File.join(PDOC_DIR, "pdoc", "generators"))
 require File.expand_path(File.join(PDOC_DIR, "pdoc", "parser"))
