@@ -45,6 +45,7 @@ task :default => [ :dist, :"dist:compress", :doc ]
 desc "Generates dist/prototype-ui.js with either all components or COMPONENTS"
 task :dist do
   require 'distrib'
+  FileUtils.mkdir_p PUI_DIST_DIR
   components = ENV['COMPONENTS'] ? ENV['COMPONENTS'].split(',').collect { |c| c.strip } : PUI_COMPONENTS
   
   Distrib.new(*components).write

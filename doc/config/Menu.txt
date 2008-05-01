@@ -2,7 +2,7 @@ Format: 1.35
 
 
 Title: Prototype-UI
-SubTitle: 523:530
+SubTitle: exported
 
 # You can add a footer to your documentation like this:
 # Footer: [text]
@@ -46,7 +46,9 @@ Group: Utilities  {
    Group: Util  {
 
       File: CSS  (util/css.js)
+      File: Date  (util/date.js)
       File: Drag  (util/drag.js)
+      File: pull_down.js  (util/pull_down.js)
       File: UI.IframeShim  (util/iframe_shim.js)
       File: UI.Logger  (util/logger.js)
       }  # Group: Util
@@ -67,6 +69,7 @@ Group: Window  {
    }  # Group: Window
 
 File: auto_complete/auto_complete.js  (auto_complete/auto_complete.js)
+File: Calendar  (calendar/calendar.js)
 File: ContextMenu  (context_menu/context_menu.js)
 File: Dock  (dock/dock.js)
 File: Shadow  (shadow/shadow.js)
