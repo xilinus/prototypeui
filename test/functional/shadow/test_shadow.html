@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>Test Shadow Class</title>
+  <script src="../../../lib/prototype.js" type="text/javascript"></script>
+  <script src="../../../dist/shadow.js" type="text/javascript"></script>
+
+  <style type='text/css'>
+  body { 
+    background: url('../assets/body_bg.png') repeat; 
+  }
+                       
+  #block {
+    position:absolute;
+    top:100px;
+    left: 100px;
+    background: #888;
+    width: 100px;
+    height: 100px;
+    
+  }
+  </style>
+  
+</head>
+<body>      
+  <div id="selection" style="position: absolute; display: none; border: 1px solid black"></div>
+  <div id="block"></div>
+  <script type="text/javascript">
+    function runTest() {   
+      var block = $("block");
+      block.shadow = new UI.Shadow("block");   
+    }  
+    document.whenReady(runTest);
+  </script>
+</body>
+</html>

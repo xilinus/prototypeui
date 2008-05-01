@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Test Contextmenu</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  
+  <script src="../../lib/prototype.js" type="text/javascript"></script>
+  <script src="../../lib/effects.js" type="text/javascript"></script>
+  <script src="../lib/unittest.js" type="text/javascript"></script>
+  <script src="../lib/event_simulate_mouse.js" type="text/javascript"></script>
+  <script src="../../dist/prototype-ui.js" type="text/javascript"></script>
+  <link href="../../themes/contextmenu/mac_os_x.css" rel="stylesheet" type="text/css" />
+  <link href="../../themes/shadow/mac_shadow.css" rel="stylesheet" type="text/css">
+
+  <link rel="stylesheet" href="../assets/test.css" type="text/css" />
+  <link href="../../themes/contextmenu/contextmenu.css" rel="stylesheet" type="text/css" />
+  <link href="../../themes/shadow/mac_shadow.css" rel="stylesheet" type="text/css"> 
+  
+  <style type="text/css" media="screen">
+    #contextArea, #contextAreaMacOsX {
+      background: #ddf;
+      height: 100px;
+      font: 3em Georgia serif;
+      color: #555;
+    }
+    #contextAreaMacOsX {
+      background: #fee;
+    }
+  </style>
+  
+  <script type="text/javascript">
+    function runTest(){
+      var myMenuItems = [
+      	{
+      		name: 'Add', 
+      		className: 'add', 
+      		callback: function(e) {
+      			e.stop();
+      			alert('you clicked "add" option on <' + e.element().tagName.toLowerCase() + '> element');
+      		}
+      	},{
+      		name: 'Edit',
+      		className: 'edit', 
+      		callback: function(e) {
+      		  e.stop();
+      			alert('Forward function called')
+      		}
+      	},{
+      		separator: true
+      	},{
+      	  name: 'Save as...',
+      	  submenu: [{
+      	    name: 'Excel (.xsl)',
+      	    className: 'xsl',
+      	    callback: function(e) { 
+      	      e.stop();
+      	      alert('Saving as .xsl');
+      	    }
+      	  },{
+      	    name: 'Word (.doc)',
+      	    className: 'doc',
+      	    callback: function(e) {
+      	      e.stop();
+      	      alert('Saving as .doc')
+      	    }
+      	  }]
+      	},{
+      		name: 'Reload', 
+      		callback: function(e) {
+      		  e.stop();
+      			alert('Reload function called')
+      		}
+      	},{
+      		name: 'Disabled option', 
+      		disabled: true
+      	}
+      ]
+      
+      var myMenu = new UI.ContextMenu({
+        selector: '#contextArea',
+        className: 'menu desktop',
+        menuItems: myMenuItems
+      })
+      
+      var myMacMenu = new UI.ContextMenu({
+        selector: '#contextAreaMacOsX',
+        className: 'menu mac_os_x',
+        menuItems: myMenuItems
+      })
+      
+      var menuElement = $$('div.menu')[0],
+          iframeElement = $$('iframe')[0],
+          shadowElement = $$('.shadow_container')[0],
+          POINTER_X = 50,
+          POINTER_Y = 50,
+          Z_INDEX = 900;
+
+      new Test.Unit.Runner({
+        
+        testContainerExists: function() { with(this) {
+          assertNotNull(menuElement);
+        }},
+        
+        testShimExists: function() { with(this) {
+          if (Prototype.Browser.IE) {
+            assertNotNull(iframeElement);
+            assertInstanceOf(UI.IframeShim, myMenu.iframe);
+          }
+          else {
+            assertNullOrUndefined(iframeElement)
+          }
+        }},
+        
+        testShadowExists: function() { with(this) {
+          assertNotNull(shadowElement);
+          assertInstanceOf(UI.Shadow, myMenu.shadow);
+        }},
+        
+        testShimIsHidden: function(){ with(this) {
+          if (Prototype.Browser.IE) {
+            assertNotVisible(iframeElement);
+          }
+        }},
+        
+        testShadowIsHidden: function() { with(this) {
+          assertNotVisible(shadowElement);
+        }},
+        
+        testContainerIsHidden: function(){ with(this) {
+          assertNotVisible(menuElement);
+        }},
+        
+        testOnlyOneShadowExists: function(){ with(this) {
+          assert($$('.shadow_container').length == 1);
+          assertEqual(myMenu.shadow, myMacMenu.shadow);
+        }},
+        
+        testContainerClassName: function(){ with(this) {
+          assert(menuElement.hasClassName('desktop'));
+          assert(menuElement.hasClassName('menu'));
+        }},
+        
+        testContainerMarkup: function(){ with(this) {
+          assertEqual(4, menuElement.select('li a').length);
+          assertEqual(1, menuElement.select('li span').length);
+        }},
+        
+        testFirstItem: function(){ with(this) {
+          var element = menuElement.select('li a')[0];
+          
+          assertEqual('Add', element.innerHTML);
+          assertEqual('#', element.readAttribute('href'));
+          assertEqual('Add', element.readAttribute('title'));
+          assert(element.hasClassName('add'));
+        }},
+        
+        testSecondItem: function(){ with(this) {
+          var element = menuElement.select('li a')[1];
+          
+          assertEqual('Edit', element.innerHTML);
+          assertEqual('#', element.readAttribute('href'));
+          assertEqual('Edit', element.readAttribute('title'));
+          assert(element.hasClassName('edit'));
+        }},
+        
+        testSeparator: function(){ with(this) {
+          var separator = menuElement.select('li')[2].down();
+          
+          assertEqual('', separator.innerHTML);
+          assertNull(separator.readAttribute('href'));
+          assert(separator.hasClassName('separator'));
+        }},
+        
+        testDisabledItem: function(){ with(this) {
+          var element = menuElement.select('li a').last();
+          
+          assertEqual('Disabled option', element.innerHTML);
+          assertEqual('#', element.readAttribute('href'));
+          assertEqual('Disabled option', element.readAttribute('title'));
+          assert(element.hasClassName('disabled'));
+        }},
+        
+        testItemClassName: function(){ with(this) {
+          assert(menuElement.select('li a')[0].hasClassName('add'));
+        }},
+        
+        testContextMenuEvent: function(){ with(this) {
+          Event.simulateMouse('contextArea', Prototype.Browser.Opera ? 'click' : 'contextmenu', {
+            pointerX: POINTER_X,
+            pointerY: POINTER_Y,
+            ctrlKey: true
+          });
+
+          wait(500, function(){
+            assertVisible(menuElement);
+            assertVisible(shadowElement);
+            if (Prototype.Browser.IE) {
+              assertVisible(iframeElement);
+            }
+          })
+        }},
+        
+        testMenuPosition: function(){ with(this) {
+          assertEqual(POINTER_X, menuElement.getNumStyle('top'));
+          assertEqual(POINTER_Y, menuElement.getNumStyle('left'));
+          assertEqual(Z_INDEX, menuElement.getNumStyle('z-index'));
+        }},
+        
+        testLeftClickEvent: function() { with(this) {
+          wait(500, function(){
+            Event.simulateMouse('contextArea', 'click');
+            assertNotVisible(menuElement);
+            assertNotVisible(shadowElement);
+            if (Prototype.Browser.IE) {
+              assertNotVisible(iframeElement);
+            }
+          })
+        }},
+        
+        testOnlyOneMenuIsShown: function(){ with(this) {
+          Event.simulateMouse('contextAreaMacOsX', Prototype.Browser.Opera ? 'click' : 'contextmenu', {
+            ctrlKey: true,
+            pointerX: 150,
+            pointerY: 150
+          });
+          assertVisible($$('.menu.mac_os_x')[0]);
+          assertNotVisible($$('.menu.desktop')[0]);
+        }}
+      })
+    }
+    
+    document.observe('dom:loaded', runTest);
+  </script>
+</head>
+<body>
+  <div id="contextArea">Win</div>
+  <div id="contextAreaMacOsX">Mac</div>
+  <div id="testlog"></div>
+</body>

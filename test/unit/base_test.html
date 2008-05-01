@@ -1,0 +1,311 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>PWC unit test</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="../assets/test.css" type="text/css" />
+
+  <script src="../../lib/prototype.js" type="text/javascript"></script>
+  <script src="../lib/unittest.js" type="text/javascript"></script>
+  <script src="../../dist/core.js" type="text/javascript"></script>
+</head>
+<body>
+
+<div id="content">
+  <div id="dummy" style="visibility: hidden; height: 50px; width: 100px;"></div>
+  <div id="scroll-container" style="display: none; height: 50px; width: 50px; overflow: auto">
+    <div id="scroll-content">Lorem ipsum ?</div>
+  </div>
+  <div id="header">
+    <h1>PWC unit test file</h1>
+    <p>
+      This file tests utility functions from <strong>src/base.js</strong>.
+    </p>
+  </div>
+
+  <!-- Log output -->
+  <div id="testlog"> </div>
+
+</div>
+
+<script type="text/javascript">
+// <![CDATA[
+
+  var Collection = Class.create(Enumerable, {
+  
+    initialize: function() {
+      this.elements = [];
+      $A(arguments).each(this.add, this);
+    },
+  
+    add: function(element) {
+      this.elements.push(element);
+      return this;
+    },
+  
+    remove: function(element) {
+      this.elements = this.elements.reject(function(e){ return e == element });
+      return this;
+    },
+  
+    _each: function(iterator) {
+      return this.elements.each(iterator);
+    }
+  });
+  
+  Collection.from = function(enumerable) {
+    var collection = new this();
+    enumerable.each(collection.add, collection);
+    return collection;
+  };
+  
+  var addSource = function($super, element) {
+    if (!this.elements.include(element))
+      $super(element);
+    return this;
+  }
+  
+  var Set = Class.create(Collection, {
+    add: addSource
+  });
+  
+  var StringSet = Class.create(Set, {
+    add: function($super, element) {
+      return $super(element.toString());
+    }
+  });
+  
+  var documentReady = [ ];
+  
+  document.whenReady(function() { documentReady.push(this) });
+  document.whenReady(function() { documentReady.push(2) });
+  document.whenReady(function() { documentReady.push(3) });
+
+  new Test.Unit.Runner({
+    testArrayEmpty: function() { with(this) {
+      assert([].empty());
+      assert(!([1].empty()));
+    }},
+    
+    testArrayAt: function() { with(this) {
+      var a = $R(0, 99).toArray();
+      assertEqual(0, a.at(0));
+      assertEqual(10, a.at(10));
+      assertEqual(99, a.at(99));
+      assertEqual(undefined, a.at(100));
+      assertEqual(99, a.at(-1));
+      assertEqual(0, a.at(-100));
+      assertEqual(undefined, a.at(-101));
+    }},
+    
+    testArrayInsert: function() { with(this) {
+      var array = $R(1, 4).toArray();
+      assertIdentical(array, array.insert(3, 'PI'), 'Array#insert should return instance');
+      assertEnumEqual([ 1, 2, 3, 'PI', 4 ], array);
+      
+      array = [ ];
+      array.insert(0, 'hello', 'world');
+      assertEnumEqual([ 'hello', 'world' ], array);
+      
+      array.insert(-1, '!');
+      assertEnumEqual([ 'hello', 'world', '!' ], array);
+      array.insert(-3, 'wonderful', 'prototypish');      
+      assertEnumEqual([ 'hello', 'wonderful', 'prototypish', 'world', '!' ], array);
+      
+      array = [ ];
+      array.insert(10, "filled");
+      assertEqual(11, array.length);
+      assertEqual("filled", array[10]);
+      assertUndefined(array[0]);
+      assertEnumEqual(["filled"], array.compact());
+    }},
+    
+    testArrayRemoveAt: function(){with(this){
+      var array = $R(1, 5).toArray();
+      array.removeAt(0);
+      assertEnumEqual([ 2, 3, 4, 5 ], array);
+      assertEqual(4, array.removeAt(-2));
+      assertEnumEqual([ 2, 3, 5 ], array);
+      assertEqual(5, array.removeAt(-1));
+      assertEnumEqual([ 2, 3 ], array);
+      assertUndefined(array.removeAt(6));
+      assertUndefined(array.removeAt(-6));
+      assertEnumEqual([ 2, 3 ], array);
+      assertUndefined(array.removeAt(2));
+      assertEqual(3, array.removeAt(1));
+      assertEqual(2, array.removeAt(-1));
+      assertEqual(0, array.length);
+    }},
+
+    testArrayRemoveIf: function(){with(this){
+      var array = $R(1, 5).toArray();
+      assertEnumEqual([ ], array.removeIf(function() { return false }));
+      assertEnumEqual([ 1, 2, 3, 4, 5 ], array);
+      
+      assertEnumEqual([ 1, 2, 3, 4, 5 ], array.removeIf(function(n) { return true }));
+      assertEnumEqual([ ], array);
+      
+      array = $R(1, 5).toArray();
+      assertEnumEqual([ 4, 5 ], array.removeIf(function(n) { return n > 3 }));
+      assertEnumEqual([ 1, 2, 3 ], array);
+    }},
+    
+    testRemove: function(){with(this){
+      var object = { };
+      var array = [ object, 1, object, object, 2 ];
+      
+      assertEqual(3, array.remove(object));
+      assertEnumEqual([ 1, 2 ], array);
+      
+      array.remove('1');
+      assertEnumEqual([ 1, 2 ], array);
+    }},
+    
+    testStringCamelcase: function() { with(this) {
+      assertEqual("GotFreshInfo", "got_fresh_info".camelcase());
+      assertEqual("XiLinusCom", "xi-linus-com".camelcase());
+      assertEqual("PrototypeWindowClass", "prototypeWindowClass".camelcase());
+    }},
+    
+    testStringMakeElement: function() { with(this) {
+      var element = '<div id="foo"><span>bar</span><img src="#"/></div><div>blah</div>'.makeElement();
+      UI.el = element;
+      assertIdentical('div', element.tagName.toLowerCase());
+      assertIdentical('foo', element.readAttribute('id'));
+      assertIdentical('span', element.down().tagName.toLowerCase());
+      assertIdentical('bar', element.down().innerHTML);
+      // can't use down('img') as of this bug 
+      // http://dev.rubyonrails.org/ticket/10508
+      assertNotNull(element.childNodes[1]);
+      assertIdentical('', element.childNodes[1].innerHTML);
+      assertIdentical('#', $(element.childNodes[1]).readAttribute('src'));
+      assertNullOrUndefined(element.childNodes[3]); // only first element should be parsed
+      assertNotNull(element.insert); // element should be extended
+    }},
+  
+    testAddMethod: function(){with(this){
+      var set = new Set(1, 2, 3),
+          stringSet = new StringSet(4, 5, 6);
+      
+      Set.addMethod('inspect', function(useDoubleQuotes) {
+        return this.elements.inspect().gsub(/^\[(.*)\]$/, "{#{1}}");
+      });
+
+      assertEqual("{1, 2, 3}", set.inspect());
+      assertEqual("{'4', '5', '6'}", stringSet.inspect());
+    }},
+    
+    testUndefMethod: function(){with(this){
+      var add = Set.method('add');
+      var set = new Set();
+      Set.undefMethod('add');
+      assertRaise('TypeError', function() { set.add("boom!") });
+      Set.addMethod('add', add);
+    }},
+    
+    testRemoveMethod: function(){with(this){
+      var add = Set.method('add');
+      var set = new Set();
+      Set.removeMethod('add');
+      set.add('twice');
+      set.add('twice');
+      assertEnumEqual(['twice', 'twice'], set.toArray());
+      Set.addMethod('add', add);
+    }},
+    
+    testAliasMethod: function(){with(this){
+      var set = new Set("a element"), stringSet = new StringSet();
+      Set.aliasMethod('push', 'add');
+      set.push("another element");
+      stringSet.push(344);
+      assertEnumEqual(["a element", "another element"], set.toArray());
+      assertEnumEqual(["344"], stringSet.toArray());
+    }},
+    
+    testAliasMethodChain: function(){with(this){
+      Set.addMethod('addWithTypeCheck', function(element) {
+        if (Object.isFunction(element)) throw { name: "TypeError" };
+        this.addWithoutTypeCheck(element);
+      });
+      Set.aliasMethodChain('add', 'typeCheck');
+      assertRaise("TypeError", function() {
+        new Set().add(Prototype.emptyFunction);
+      });
+    }},
+    
+    testElementGetScrollDimensions: function(){with(this) {
+      // TODO: should work with hidden elements just like Element#getDimensions
+      $('scroll-container').show();
+      assertHashEqual($('scroll-container').getDimensions(), $('scroll-container').getScrollDimensions());
+      $('scroll-content').setStyle({ width: "200px", height: "200px" });
+      assertHashEqual({ width: 200, height: 200 }, $('scroll-container').getScrollDimensions());
+      $('scroll-container').hide();
+    }},
+    
+    testElementGetScrollOffset: function(){with(this) {
+      $('scroll-container').show();
+      $('scroll-container').scrollLeft = 20;
+      $('scroll-container').scrollTop = 30;
+      var offset = $('scroll-container').getScrollOffset();
+      assertEqual(20, offset.left);
+      assertEqual(30, offset.top);
+      assertEqual(20, offset[0]);
+      assertEqual(30, offset[1]);
+      $('scroll-container').hide();
+    }},
+    
+    testElementSetScrollOffset: function(){with(this) {
+      $('scroll-container').show();
+      
+      assertIdentical($('scroll-container'), $('scroll-container').setScrollOffset({ left: 50, top: 40 }));
+  
+      var offset = $('scroll-container').getScrollOffset();
+      assertEqual(50, offset.left);
+      assertEqual(40, offset.top);
+      assertEqual(50, offset[0]);
+      assertEqual(40, offset[1]);
+      
+      assertIdentical($('scroll-container'), $('scroll-container').setScrollOffset(40, 50));
+      
+      var offset = $('scroll-container').getScrollOffset();
+      assertEqual(40, offset.left);
+      assertEqual(50, offset.top);
+      assertEqual(40, offset[0]);
+      assertEqual(50, offset[1]);
+      
+      $('scroll-container').hide();
+    }},
+
+    testGetNumStyle: function(){with(this){
+      $('dummy').setOpacity(0);
+      assertEqual(50, $('dummy').getNumStyle('height'));
+      assertEqual(100, $('dummy').getNumStyle('width'));
+      assertEqual($('dummy').getNumStyle('height'), parseInt($('dummy').getStyle('height')));
+      assertNull($('dummy').getNumStyle('top'));
+      assertEqual(0, $('dummy').getNumStyle('opacity'));
+      assertNull($('dummy').getNumStyle('position'));
+    }},
+    
+    testDocumentWhenReady: function(){with(this){
+      assertEqual(3, documentReady.length);
+      assertIdentical(document, documentReady.shift(), "callback should be bound to document");
+      assertEnumEqual([ 2, 3 ], documentReady, "callbacks aren't called in register order");
+      var receiver;
+      document.whenReady(function() { receiver = this });
+      assertUndefined(receiver, "callback should be defered when document is already loaded");
+      wait(100, function() {
+        assert(receiver, "callback doesn't get called when document is already loaded");
+        assertIdentical(document, receiver, "callback should be bound to document");
+      });
+    }},
+    
+    testUtilityVariables: function(){with(this){
+      assertIdentical(document.body, $body);
+      assertIdentical($$('head')[0], $head);
+    }}
+  }, "testlog");
+// ]]>
+</script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" debug="false">
+<head>
+	<title>Prototype UI : Functional test : Carousel : Ajax test</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta http-equiv="Content-Language" content="en" />
+    <meta name="language" content="en" />
+    <script src="../../../lib/prototype.js" type="text/javascript"></script>
+    <script src="../../../lib/effects.js" type="text/javascript"></script>
+    <script src="../../../dist/carousel.js" type="text/javascript"></script>
+    <link href="../../../themes/carousel/prototype-ui.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+	  body {
+        margin: 10px;
+	  }
+
+    #spinner {
+      position: absolute;
+      top: 0px;
+      left: 50px;
+      width: 100%;
+      height: 240px;
+      background: #FFF;
+      z-index: 10;
+      text-align: center;
+      font-size: 40px;
+      line-height: 40px;
+      padding-top: 50px;
+      opacity: 0;
+      margin-left: -50px;
+    }
+
+    #spinner_vertical {
+      position: absolute;
+      top: 0px;
+      left: 20px;
+      width: 210px;
+      height: 150px;
+      background: #FFF;
+      z-index: 10;
+      text-align: center;
+      font-size: 40px;
+      line-height: 40px;
+      padding-top: 80px;
+      opacity: 0;
+    }
+    </style>
+  </head>
+  <body>
+	<h1>Prototype UI : functional test : Carousel : Ajax test</h1>
+    <h2>Liquid Layout</h2>    
+    <div id="horizontal_carousel">
+      <div class="previous_button"></div>  
+      <div class="container">
+        <ul>
+        </ul>
+        <div id="spinner" style="display: none;">Loading ...<br /></div>
+      </div>
+      <div class="next_button"></div>
+    </div>
+    
+    <h2>Fixed Layout</h2>    
+    <div id="vertical_carousel">
+      <div class="previous_button"></div>  
+      <div class="container">
+        <ul>
+        </ul>
+        <div id="spinner_vertical" style="display: block;">Loading ...<br /></div>
+      </div>
+      <div class="next_button"></div>
+    </div>
+    
+    <script type="text/javascript">
+    // <![CDATA[
+      // Delay response
+      Ajax.Request.prototype.originalInitialize = Ajax.Request.prototype.initialize;
+      Ajax.Request.prototype.initialize = function(url, options) {
+        options.onSuccess = options.onSuccess.wrap(function(proceed, request, json) {
+          proceed.curry(request, json).delay(1);
+        });
+        this.originalInitialize(url, options);
+      }
+
+      // Mock ajax response
+      Ajax.Response.prototype._getHeaderJSON = function() {
+        var nbElements = 12;
+
+        var template = '<li><img alt="Window" src="../../assets/images/window.png" /><br />\
+  	                    <img alt="Prototype UI Window" src="../../assets/images/window_logo.png" /><br />\
+                        Windows and Dialogs #XX</li>';
+        var from = this.request.parameters.from;
+        var to   = Math.min(nbElements, this.request.parameters.to);
+        var html = $R(from, to).inject("", function(html, n) { return html + template.gsub("XX", n); });
+  	    return {html: html, from: from, to: to, more: to != nbElements};
+      }
+
+      var carousel = null;
+      function runTest() {
+        updateCarouselSize();
+        carousel = new UI.Ajax.Carousel("horizontal_carousel", {url: "../../fixtures/ajax_carousel_content.html", elementSize: 250})
+          .observe("request:started", function() {
+	            $('spinner').show().morph("opacity:0.8", {duration:0.5});
+            })
+          .observe("request:ended", function() {
+	            $('spinner').morph("opacity:0", {duration:0.5, afterFinish: function(obj) { obj.element.hide(); }});
+            });
+            
+        verticalCarousel = new UI.Ajax.Carousel("vertical_carousel",  
+                                                {url: "../../fixtures/ajax_carousel_content.html", 
+                                                elementSize: 250, 
+                                                direction: "vertical"})
+          .observe("request:started", function() {
+	          $('spinner_vertical').show().morph("opacity:0.8", {duration:0.5});
+          })
+          .observe("request:ended", function() {
+	          $('spinner_vertical').morph("opacity:0", {duration:0.5, afterFinish: function(obj) { obj.element.hide(); }});
+          });
+      }
+
+      function resized() {
+        updateCarouselSize();  
+        if (carousel)
+          carousel.updateSize();
+      }
+
+      function updateCarouselSize() {
+		    var dim = document.viewport.getDimensions(); 
+		    dim.width -= 20;                             
+        $("horizontal_carousel").style.width = dim.width + "px";
+        $$("#horizontal_carousel .container").first().style.width =  (dim.width - 100) + "px";
+      }
+
+      document.whenReady(runTest);
+      Event.observe(window, "resize", resized);
+    // ]]>
+    </script>
+  </body>
+</html>

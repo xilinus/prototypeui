@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>PWC unit test</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="../assets/test.css" type="text/css" />
+
+  <script src="../../lib/prototype.js" type="text/javascript"></script>
+  <script src="../lib/unittest.js" type="text/javascript"></script>
+  <script src="../../dist/util.js" type="text/javascript"></script>
+</head>
+<body>
+
+<div id="content">
+  <div id="header">
+    <h1>PWC unit test file</h1>
+    <p>
+      This file tests utility functions from <strong>src/util/date.js</strong>.
+    </p>
+  </div>
+
+  <!-- Log output -->
+  <div id="testlog"> </div>
+</div>
+
+<script type="text/javascript">
+// <![CDATA[
+  new Test.Unit.Runner({
+    testDateStrftime: function(){with(this) {
+      var date = new Date("March 9, 1998 22:48:21");
+
+      assertEqual('Mon', date.strftime('%a'));	
+      assertEqual('Monday', date.strftime('%A'));	
+      assertEqual('Mar', date.strftime('%b'));	
+      assertEqual('March', date.strftime('%B'));	
+
+      assertEqual('19', date.strftime('%C'));	
+      assertEqual('09', date.strftime('%d'));	
+      assertEqual('9', date.strftime('%e'));	
+      assertEqual('68', date.strftime('%j'));	
+      assertEqual('03', date.strftime('%m'));	
+      assertEqual('1', date.strftime('%u'));	
+      assertEqual('1', date.strftime('%w'));	
+      assertEqual('98', date.strftime('%y'));	
+      assertEqual('1998', date.strftime('%Y'));	
+
+      assertEqual('22', date.strftime('%H'));	
+      assertEqual('10', date.strftime('%I'));	
+      assertEqual('48', date.strftime('%M'));	
+      assertEqual('pm', date.strftime('%p'));	
+      assertEqual('21', date.strftime('%S'));	
+
+      assertEqual('03/09/98', date.strftime('%D'));	
+      assertEqual('10:48:21 pm', date.strftime('%r'));	
+      assertEqual('22:48:21', date.strftime('%R'));	
+      assertEqual('22:48:21', date.strftime('%T'));	
+
+      assertEqual('03/09/1998 22:48:21', date.strftime('%c'));	
+      assertEqual('03/09/1998', date.strftime('%x'));	
+      assertEqual('22:48:21', date.strftime('%X'));	
+    }},
+
+    testDateParseString: function(){with(this) {
+      var date = new Date("March 9, 1998 22:48:21").toGMTString();
+
+      assertEqual(2, Date.parseString('March','%B').getMonth());
+      assertEqual(2, Date.parseString('Mar','%b').getMonth());
+      assertEqual(6, Date.parseString('July','%B').getMonth());
+      assertEqual(4, Date.parseString('May','%b').getMonth());
+      assertEqual(8, Date.parseString('September','%B').getMonth());
+
+      assertEqual(2, Date.parseString('03','%m').getMonth());
+      assertEqual(2, Date.parseString('3','%m').getMonth());
+
+      assertEqual(9, Date.parseString('09', '%d').getDate());
+      assertEqual(9, Date.parseString('9', '%e').getDate());
+
+      assertEqual(1998, Date.parseString('98', '%y').getFullYear());
+      assertEqual(1998, Date.parseString('1998', '%Y').getFullYear());
+      assertEqual(2008, Date.parseString('08', '%y').getFullYear());
+      assertEqual(2008, Date.parseString('2008', '%Y').getFullYear());
+
+      assertEqual(22, Date.parseString('22','%H').getHours());
+      assertEqual(22, Date.parseString('10 pm','%I %p').getHours());
+      assertEqual(10, Date.parseString('10 am','%I %p').getHours());
+
+      assertEqual(date, Date.parseString('03/09/98 22:48:21','%D %T').toGMTString());
+
+      assertEqual(22, Date.parseString('22:48:21 03/09/98','%X %x').getHours());
+      assertEqual(22, Date.parseString('03/09/98 22:48:21','%c').getHours());
+
+      assertEqual(date, Date.parseString('9.03.98 22:48:21','%e.%m.%y %H:%M:%S').toGMTString());
+      assertEqual(date, Date.parseString('Mon, 09. Mar 1998 22:48:21','%a, %e. %b %Y %H:%M:%S').toGMTString());
+    }}
+  }, "testlog");
+// ]]>
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	  <title>Prototype UI : functional test : AutoComplete</title>
+    
+    <script src="../../../lib/prototype.js" type="text/javascript"></script>
+    <script src="../../../lib/effects.js" type="text/javascript"></script>
+    <script src="../../../test/lib/unittest.js" type="text/javascript"></script>
+    <script src="../../../dist/prototype-ui.js" type="text/javascript"></script>
+    <link href="../../../themes/auto_complete/mac_os_x.css" rel="stylesheet" type="text/css" />
+    <link href="../../../themes/shadow/auto_complete.css" rel="stylesheet" type="text/css">
+    <style>
+    #input-text {
+      width: 500px;
+    }
+    </style>
+  </head>
+  
+  <body id="test">    
+    <h1>Prototype UI autocomplete Demo</h1>      
+    Type "e" for example to see autocompletion.<br/><br/>
+    <form action="test_submit" accept-charset="utf-8" id="test-form">
+      Tags: <div id="input-text">
+        <input type="text" value="" id="pui-demo" name="taglist" />
+      </div>                           
+      <br/>             
+      <input type=submit onclick="console.log($('test-form').serialize());return false;" value="Submit"/>       
+    </form>         
+    <br/><br/>
+    <script  type="text/javascript">
+    Event.observe(window, "load", function() {
+      ac = new UI.AutoComplete('pui-demo', { shadow:             "auto_complete",
+                                             tokens:             [",", " "],
+                                             max:                {selection: 10, selected:5} 
+                                             }).init();
+      ac.observe('input:empty',           function(event) {event.memo.autocomplete.showMessage("Enter tags separated by coma or space")})
+        .observe('selection:max_reached', function(event) {event.memo.autocomplete.showMessage("5 tags maximum")})
+        .observe('selection:empty',       function(event) {event.memo.autocomplete.showMessage("Nothing match")})
+      
+      ac.setAutocompleteList([{text:"Internet",    value:1},
+                              {text:"Web2.0",      value:2},
+                              {text:"Ruby",        value:3},
+                              {text:"RubyOnRails", value:4},
+                              {text:"Prototype",   value:5},
+                              {text:"jQuery",      value:6},
+                              {text:"HTML",        value:7},
+                              {text:"Ajax",        value:8},
+                              {text:"Google",      value:9},
+                              {text:"Apple",       value:10},
+                              {text:"HTTP",        value:11}
+                              ]);
+      ac.input.focus();
+    });
+    </script>
+  </body>  
+</html>

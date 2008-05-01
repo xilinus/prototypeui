@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>Test Modal Windows</title>
+  <script src="../../../lib/prototype.js" type="text/javascript"></script>
+  <script src="../../../lib/effects.js" type="text/javascript"></script>
+  <script src="../../../dist/window.js" type="text/javascript"></script>
+  
+  <link href="../../../themes/window/window.css" rel="stylesheet" type="text/css">
+  <link href="../../../themes/window/alphacube.css" rel="stylesheet" type="text/css">
+  <style type='text/css'>
+  body {
+	  background: url('../../assets/body_bg.png') repeat; 
+	  height: 100%;
+  }
+  </style>
+  
+</head>                          
+<body>
+  <div id="input">
+    <input type="text"/><br/>
+  </div>
+<script type="text/javascript">
+  //insertDebugControl();
+  function runTest() {
+    w = new UI.Window({width: 200, top: 50, left: 110, shadow: true}).show(); 
+    w.content.update($('input'))
+  }  
+  document.whenReady(runTest);
+</script>
+
+</body>
+</html>

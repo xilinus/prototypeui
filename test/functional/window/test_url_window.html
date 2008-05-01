@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>Test URL Content</title>
+  <script src="../../../lib/prototype.js" type="text/javascript"></script>
+  <script src="../../../lib/effects.js" type="text/javascript"></script>
+  <script src="../../../dist/window.js" type="text/javascript"></script>
+
+  <link href="../../../themes/window/window.css" rel="stylesheet" type="text/css">
+  <link href="../../../themes/window/alphacube.css" rel="stylesheet" type="text/css">
+  <link href="../../../themes/window/mac_os_x.css" rel="stylesheet" type="text/css">
+  <link href="../../../themes/shadow/mac_shadow.css" rel="stylesheet" type="text/css"> 
+  
+  <style type='text/css'>
+  body {
+    background: #CCC;
+  }
+  </style>
+  
+</head>
+<body>
+<script type="text/javascript">
+  function runTest() {
+    UI.defaultWM.options.blurredWindowsDontReceiveEvents = true;
+
+    function openWindow(url) {
+      new UI.URLWindow({
+        width: 600, 
+        height: 400,
+        shadow: true,
+        theme: "mac_os_x",
+        url: url || '../../fixtures/url_content.html' }).show();  
+     } 
+   
+     openWindow();  
+     openWindow();  
+     openWindow("http://www.google.com");   
+   }  
+   document.whenReady(runTest);
+   
+</script>
+
+</body>
+</html>

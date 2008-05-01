@@ -1,0 +1,151 @@
+.vista .nw {
+	background:transparent url(vista/top.gif) no-repeat scroll 0 -27px;
+	height:27px;
+	padding-left:4px;
+}
+
+.vista .ne {
+	background:transparent url(vista/top.gif) no-repeat scroll right 0;
+	height:27px;
+	padding-right:4px;
+}
+
+.vista .n {
+	background:transparent url(vista/t.png) repeat-x scroll 0 0px;
+	color:#123456;
+	font:bold 14px/25px Tahoma, Arial, sans-serif;
+	height:27px;
+	margin:0;
+	padding:0;
+	text-align:left;
+	opacity: 0.5;                        
+	filter:alpha(opacity=50);
+	overflow: hidden;
+	padding-right:80px; 
+	padding-left: 5px;
+	line-height: 27px; 
+	color: #000;
+	
+}
+
+.vista .content {
+	background-color:#FDFDFD;
+	color:#000;
+	font:normal 12px/1em Tahoma, Arial, sans-serif;
+	overflow:auto;
+}
+
+.vista .w {
+	background:transparent url(vista/border.gif) repeat-y scroll 0px 0px;
+	font-size:2px;
+	padding-left:4px;
+}
+
+.vista .e {
+	background:transparent url(vista/border.gif) repeat-y scroll right 0;
+	font-size:2px;
+	padding-right:4px;
+}
+
+.vista .sw {
+	background:transparent url(vista/bottom.gif) no-repeat scroll 0 -52px;
+	font-size:2px;
+	height:26px;
+	padding-left:22px;
+}
+
+.vista .se {
+	background:transparent url(vista/bottom.gif) no-repeat scroll right 0;
+	font-size:2px;
+	height:26px;
+	padding-right:22px;
+}
+
+.vista .s {
+	background:transparent url(vista/bottom.gif) repeat-x scroll 0 -26px;
+	font-size:14px;
+	line-height: 26px;
+	height:26px;
+	overflow:hidden;
+} 
+
+.vista .se_resize_handle {
+	background:transparent url(vista/bottom.gif) no-repeat scroll right 0;
+	font-size:2px;
+	height:26px;
+	padding-right:22px;
+}
+
+.vista .se_sizer { 
+  width:12px;
+  height:12px;
+}          
+
+.vista .buttons {
+  position: absolute;
+  top:1px;
+  right:10px;
+  height: 20px;   
+}                
+
+.vista .buttons a.close {
+	background:transparent url(vista/buttons.gif) no-repeat 0 -51px;
+	display:block;
+	height:17px;
+	float:left;
+	width:43px;  
+	font-size:1px;
+	padding-top:2px; /* padding-top = buttons order, it will be reset to 0, do not use padding, use margin*/       
+}
+
+.vista_focused .buttons a.close {
+	background:transparent url(vista/buttons.gif) no-repeat 0 0px;
+}
+
+.vista .buttons a.maximize {
+	background:transparent url(vista/buttons.gif) no-repeat 0 -68px;
+	display:block;
+	height:17px;
+	float:left;
+	width:27px;
+ 	font-size:1px;
+ padding-top:1px; /* padding-top = buttons order, it will be reset to 0, do not use padding, use margin*/       
+}   
+
+.vista_focused .buttons a.maximize {
+	background:transparent url(vista/buttons.gif) no-repeat 0 -17px;
+}
+
+.vista .buttons a.minimize {
+	background:transparent url(vista/buttons.gif) no-repeat 0 -85px;
+	display:block;
+	height:17px;
+	float:left;
+	width:27px;
+ 	font-size:1px;
+ padding-top:0px; /* padding-top = buttons order, it will be reset to 0, do not use padding, use margin*/       
+}                            
+
+.vista_focused .buttons a.minimize {
+	background:transparent url(vista/buttons.gif) no-repeat 0 -34px;
+}
+
+.vista .buttons a.minimize.disabled, .vista .buttons.over a.minimize.disabled  {
+	background:none;
+}
+
+.vista_overlay {
+	background-color: #FFF;
+	filter:alpha(opacity=60);
+	-moz-opacity: 0.6;
+	opacity: 0.6;
+}
+
+.vista_wired {
+	background:#FFF;
+	border:1px #000 dashed;
+	filter:alpha(opacity=60);
+	opacity:0.6;	
+	position:absolute;
+	-moz-opacity:0.6;
+}

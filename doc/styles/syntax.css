@@ -1,0 +1,120 @@
+/* Coming from Thoughbots
+*/
+
+.CCode {
+background-color: #f8f8f8;
+border: 1px solid silver;
+font-family: 'Courier New', 'Terminal', monospace;
+color: #100;
+}
+.CCode pre { margin: 0px }
+
+div.CCode {
+margin-top: 20px;
+margin-bottom: 20px;
+border-collapse: collapse; width: 100%; padding: 10px;
+font-family: 'Courier New', 'Terminal', monospace;
+font-size: 9pt;
+}
+
+span.CCode {}
+
+table.CCode {
+margin: auto;
+margin-top: 20px;
+margin-bottom: 20px;
+border-collapse: collapse; width: 90%; padding: 10px;
+font-family: 'Courier New', 'Terminal', monospace;
+font-size: 9pt;
+}
+table.CCode td { padding: 2px 4px; vertical-align: top }
+
+.CCode .line_numbers, .CCode .no {
+background-color: #def;
+color: gray;
+text-align: right;
+}
+.CCode .line_numbers tt { font-weight: bold }
+.CCode .no { padding: 0px 4px }
+.CCode .code { width: 100% }
+
+ol.CCode { font-size: 10pt }
+ol.CCode li { white-space: pre }
+
+.CCode .code pre { overflow: auto }
+
+.CCode .af { color:#00C }
+.CCode .an { color:#007 }
+.CCode .av { color:#700 }
+.CCode .aw { color:#C00 }
+.CCode .bi { color:#509; font-weight:bold }
+.CCode .c  { color:#888 }
+
+.CCode .ch { color:#04D }
+.CCode .ch .k { color:#04D }
+.CCode .ch .dl { color:#039 }
+
+.CCode .cl { color:#B06; font-weight:bold }
+.CCode .co { color:#036; font-weight:bold }
+.CCode .cr { color:#0A0 }
+.CCode .cv { color:#369 }
+.CCode .df { color:#099; font-weight:bold }
+.CCode .di { color:#088; font-weight:bold }
+.CCode .dl { color:black }
+.CCode .do { color:#970 }
+.CCode .ds { color:#D42; font-weight:bold }
+.CCode .e  { color:#666; font-weight:bold }
+.CCode .en { color:#800; font-weight:bold }
+.CCode .er { color:#F00; background-color:#FAA }
+.CCode .ex { color:#F00; font-weight:bold }
+.CCode .fl { color:#60E; font-weight:bold }
+.CCode .fu { color:#06B; font-weight:bold }
+.CCode .gv { color:#d70; font-weight:bold }
+.CCode .hx { color:#058; font-weight:bold }
+.CCode .i  { color:#00D; font-weight:bold }
+.CCode .ic { color:#B44; font-weight:bold }
+
+.CCode .il { background: #eee }
+.CCode .il .il { background: #ddd }
+.CCode .il .il .il { background: #ccc }
+.CCode .il .dl { font-weight: bold ! important; color: #888 ! important }
+
+.CCode .in { color:#B2B; font-weight:bold }
+.CCode .iv { color:#33B }
+.CCode .la { color:#970; font-weight:bold }
+.CCode .lv { color:#963 }
+.CCode .oc { color:#40E; font-weight:bold }
+.CCode .on { color:#000; font-weight:bold }
+.CCode .op { }
+.CCode .pc { color:#038; font-weight:bold }
+.CCode .pd { color:#369; font-weight:bold }
+.CCode .pp { color:#579 }
+.CCode .pt { color:#339; font-weight:bold }
+.CCode .r  { color:#080; font-weight:bold }
+
+.CCode .rx { background-color:#fff0ff }
+.CCode .rx .k { color:#808 }
+.CCode .rx .dl { color:#404 }
+.CCode .rx .mod { color:#C2C }
+.CCode .rx .fu  { color:#404; font-weight: bold }
+
+.CCode .s  { background-color:#fff0f0 }
+.CCode .s  .s { background-color:#ffe0e0 }
+.CCode .s  .s  .s { background-color:#ffd0d0 }
+.CCode .s  .k { color:#D20 }
+.CCode .s  .dl { color:#710 }
+
+.CCode .sh { background-color:#f0fff0 }
+.CCode .sh .k { color:#2B2 }
+.CCode .sh .dl { color:#161 }
+
+.CCode .sy { color:#A60 }
+.CCode .sy .k { color:#A60 }
+.CCode .sy .dl { color:#630 }
+
+.CCode .ta { color:#070 }
+.CCode .tf { color:#070; font-weight:bold }
+.CCode .ts { color:#D70; font-weight:bold }
+.CCode .ty { color:#339; font-weight:bold }
+.CCode .v  { color:#036 }
+.CCode .xt { color:#444 }

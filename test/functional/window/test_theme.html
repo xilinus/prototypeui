@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>Test Theme</title>
+  <script src="../../../lib/prototype.js" type="text/javascript"></script>
+  <script src="../../lib/firebug/firebug.js" type="text/javascript"></script>  
+  <script src="../../../lib/effects.js" type="text/javascript"></script>
+  <script src="../../../dist/window.js" type="text/javascript"></script>
+
+  <link href="../../../themes/window/window.css" rel="stylesheet" type="text/css">
+  <link href="../../../themes/window/alphacube.css" rel="stylesheet" type="text/css">
+  <link href="../../../themes/window/mac_os_x.css" rel="stylesheet" type="text/css">
+  <link href="../../../themes/window/leopard.css" rel="stylesheet" type="text/css">
+  <link href="../../../themes/window/vista.css" rel="stylesheet" type="text/css">
+  <link href="../../../themes/window/lighting.css" rel="stylesheet" type="text/css">
+  <link href="../../../themes/window/black_hud.css" rel="stylesheet" type="text/css">  
+
+  <link href="../../../themes/shadow/mac_shadow.css" rel="stylesheet" type="text/css"> 
+  <link href="../../../themes/shadow/drop_shadow.css" rel="stylesheet" type="text/css"> 
+  <style type='text/css'>
+  body { 
+    background: url('../../assets/body_bg.png') repeat; 
+  }
+  </style>
+</head>
+<body>
+<script type="text/javascript">
+var loremIpsum = "<p style='margin:10px'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>";
+
+  function runTest() {
+    var width = 200, height = 300, spacing = 20;
+      CSS.preloadImages();
+
+    UI.Window.setOptions({
+      top: 200,
+      width: width,
+      height: height,
+      shadow: true, 
+      show: function(el) { el.appear({ duration: 0.2 }) },
+      hide: function(el) { el.fade({ duration: 0.2 }) }
+    });
+    
+    function openWindow(theme, index) {
+      var options = {
+        theme: theme,      
+        shadowTheme: theme == "vista" ? "drop_shadow" : "mac_shadow",
+        left: spacing + (width + spacing) * index
+      };
+      
+      if (theme == "black_hud")
+        options.shadow = false;
+      
+      var w = new UI.Window(options).setHeader(theme).setContent(loremIpsum).show();
+      
+      if (options.shadow)
+        w.setFooter("Shadow Theme: " + w.getShadowTheme());
+    }
+    $w("alphacube mac_os_x bluelighting leopard vista black_hud").each(openWindow);
+    
+  }
+  
+  document.whenReady(runTest);
+</script>
+
+</body>
+</html>

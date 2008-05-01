@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" debug="false">
+<head>
+	<title>Test Dialog</title>
+  <script src="../../../lib/prototype.js" type="text/javascript"></script>
+  <script src="../../../lib/effects.js" type="text/javascript"></script>  
+  <script src="../../../dist/window.js" type="text/javascript"></script>
+
+  <link href="../../../themes/window/window.css" rel="stylesheet" type="text/css">
+  <link href="../../../themes/dialog/famfamfam.css" rel="stylesheet" type="text/css">
+  <link href="../../../themes/window/alphacube.css" rel="stylesheet" type="text/css">
+  <link href="../../../themes/shadow/mac_shadow.css" rel="stylesheet" type="text/css">
+  
+  <style type='text/css'>
+  body {
+    background: #CCC;
+  }
+  .label, .input  {
+    padding:10px;
+    color:#000;
+    text-align:left;
+    float:left; 
+    width:100px;
+    font-size:20px;
+    color:#64355A;
+  } 
+
+  .input {
+    width:200px;
+  }
+  .panel {
+    margin:10px;  
+    float:left;
+    height: 120px;
+  }
+  </style>
+  
+</head>
+<body>    
+  <h3>Fake wizard to show how to use callbacks and buttons. As Ajax requests are fake, wizard content is lost on each step.</h3>
+<script type="text/javascript">   
+  function openLoginPanel() { 
+    var buttons = [{title: 'Previous', disabled: true},
+                   {title: 'Next'},
+                   {title: 'Cancel',   className: 'cancel', callback: function(win) { win.destroy(); }},
+                   ]
+    
+    var dialog = new UI.Dialog({height:220, width: 410, shadow: true, buttons: buttons})
+      .center()
+      .setHeader("Register")
+      .setAjaxContent("../../fixtures/ajax_wizard_dialog_1.html")
+      .show()
+      .focus();
+
+    var previousButton = dialog.getDialogButton(0);
+    var nextButton     = dialog.getDialogButton(1);
+    dialog.step = 1;
+    
+    nextButton.callback = function() { 
+      if (dialog.step == 2) { 
+        dialog.hide();
+      } 
+      else {
+        dialog.setAjaxContent("../../fixtures/ajax_wizard_dialog_2.html");
+        dialog.enableDialogButton(0);
+        nextButton.update("Finish"); 
+        dialog.step = 2;
+      }
+      return true;
+    }
+    
+    previousButton.callback = function() {
+      if (dialog.step == 2) {
+        dialog.setAjaxContent("../../fixtures/ajax_wizard_dialog_1.html");
+        dialog.disableDialogButton(0);
+        nextButton.update("Next"); 
+        dialog.step = 1;
+      }
+    }
+  } 
+            
+  document.whenReady(openLoginPanel) 
+</script>
+
+</body>
+</html>

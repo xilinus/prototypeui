@@ -1,0 +1,272 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Event.simulateMouse</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	
+  <script src="../../../lib/prototype.js" type="text/javascript"></script>
+  <script src="../../lib/unittest.js" type="text/javascript"></script>
+  <script src="../../lib/event_simulate_mouse.js" type="text/javascript"></script>
+  
+  <link rel="stylesheet" href="../../assets/test.css" type="text/css" />
+  
+</head>
+<body>
+<h1>Event.simulateMouse</h1>
+
+<div id="dummy"></div>
+
+<!-- Log output -->
+<div id="testlog"> </div>
+
+<!-- Tests follow -->
+<script type="text/javascript" language="javascript" charset="utf-8">
+// <![CDATA[
+  
+  var WAIT_TIME = 300,
+      EVENTS = $w('click dblclick mousedown mouseup mousemove mouseover mouseout contextmenu');
+  
+	function getRandomInt(min, max) {
+  		return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+	
+	var dummy = $('dummy'),
+		  originalStyle = {
+			  width: '50px',
+			  height: '20px',
+			  background: '#bbf'
+		  };
+			
+	dummy.setStyle(originalStyle);
+	
+	new Test.Unit.Runner({
+    
+	// stripping observers, resetting styles
+	teardown: function() { with(this) {
+    dummy.stopObserving();
+		dummy.setStyle(originalStyle);
+  }},
+
+	testClick: function(){ with(this) {
+		var value = getRandomInt(10, 100);
+		$('dummy').observe('click', function(){ this.setStyle({width: value + 'px'}) });
+		Event.simulateMouse('dummy', 'click');
+		wait(WAIT_TIME, function() {
+      assertEqual(value, dummy.getWidth());
+    })
+	}},
+
+	testDblClick: function(){ with(this) {
+		var value = getRandomInt(10, 100);
+		$('dummy').observe('dblclick', function(){ this.setStyle({width: value + 'px'}) });
+		Event.simulateMouse('dummy', 'dblclick');
+		wait(WAIT_TIME, function() {
+      assertEqual(value, dummy.getWidth());
+    })
+	}},
+
+	testMouseDown: function() { with(this) {
+		var value = getRandomInt(10, 100);
+		$('dummy').observe('mousedown', function(){ this.setStyle({width: value + 'px'}) });
+		Event.simulateMouse('dummy', 'mousedown');
+		wait(WAIT_TIME, function(){
+      assertEqual(value, dummy.getWidth());
+    })
+	}},
+
+	testMouseUp: function() { with(this) {
+		var value = getRandomInt(10, 100);
+		$('dummy').observe('mouseup', function(){ this.setStyle({width: value + 'px'}) });
+		Event.simulateMouse('dummy', 'mouseup');
+		wait(WAIT_TIME, function() {
+      assertEqual(value, dummy.getWidth());
+    })
+	}},
+
+	testMouseOver: function() { with(this) {
+		var value = getRandomInt(10, 100);
+		$('dummy').observe('mouseover', function(){ this.setStyle({width: value + 'px'}) });
+		Event.simulateMouse('dummy', 'mouseover');
+		wait(WAIT_TIME, function(){
+      assertEqual(value, dummy.getWidth());
+    })
+	}},
+
+	testMouseMove: function() { with(this) {
+		var value = getRandomInt(10, 100);
+		$('dummy').observe('mousemove', function(){ this.setStyle({width: value + 'px'}) });
+		Event.simulateMouse('dummy', 'mousemove');
+		wait(WAIT_TIME, function() {
+      assertEqual(value, dummy.getWidth()); 
+    })
+	}},
+
+	testMouseOut: function() { with(this) {
+		var value = getRandomInt(10, 100);
+		$('dummy').observe('mouseout', function(){ this.setStyle({width: value + 'px'}) });
+		Event.simulateMouse('dummy', 'mouseout');
+		wait(WAIT_TIME, function() {
+      assertEqual(value, dummy.getWidth());
+    })
+	}},
+	
+	// Misc events
+	testContextMenu: function() { with(this) {
+		var value = getRandomInt(10, 100);
+		$('dummy').observe('contextmenu', function(){ this.setStyle({width: value + 'px'}) });
+		Event.simulateMouse('dummy', 'contextmenu');
+		wait(WAIT_TIME, function() {
+      assertEqual(value, dummy.getWidth());
+    })
+	}},
+
+	// Event properties
+	testCtrlKeyTrue: function() { with(this) {
+		var value = getRandomInt(10, 100),
+			  key = null;
+		$('dummy').observe('click', function(e){ 
+			this.setStyle({width: value + 'px'});
+			key = e.ctrlKey; 
+		})
+		Event.simulateMouse('dummy', 'click', {ctrlKey: true});
+		wait(WAIT_TIME, function(){
+      assertEqual(value, dummy.getWidth());
+      assertIdentical(true, key);
+    })
+	}},
+	
+	testCtrlKeyFalse: function() { with(this) {
+		var value = getRandomInt(10, 100),
+			  key = null;
+		$('dummy').observe('click', function(e){ 
+			this.setStyle({width: value + 'px'});
+			key = e.ctrlKey; 
+		})
+		Event.simulateMouse('dummy', 'click', {ctrlKey: false});
+		wait(WAIT_TIME, function(){
+      assertEqual(value, dummy.getWidth());
+      assertIdentical(false, key);
+    })
+	}},
+	
+	testAltKeyTrue: function() { with(this) {
+		var value = getRandomInt(10, 100),
+			  key = null;
+		$('dummy').observe('click', function(e){ 
+			this.setStyle({width: value + 'px'});
+			key = e.altKey; 
+		})
+		Event.simulateMouse('dummy', 'click', {altKey: true});
+		wait(WAIT_TIME, function(){
+      assertEqual(value, dummy.getWidth());
+      assertIdentical(true, key);
+    })
+	}},
+	
+	testAltKeyFalse: function() { with(this) {
+		var value = getRandomInt(10, 100),
+			  key = null;
+		$('dummy').observe('click', function(e){ 
+			this.setStyle({width: value + 'px'});
+			key = e.altKey; 
+		})
+		Event.simulateMouse('dummy', 'click', {altKey: false});
+		wait(WAIT_TIME, function(){
+      assertEqual(value, dummy.getWidth());
+      assertIdentical(false, key);
+    })
+	}},
+	
+	testShiftKeyTrue: function() { with(this) {
+		var value = getRandomInt(10, 100),
+			  key = null;
+		$('dummy').observe('click', function(e){ 
+			this.setStyle({width: value + 'px'});
+			key = e.shiftKey; 
+		})
+		Event.simulateMouse('dummy', 'click', {shiftKey: true});
+		wait(WAIT_TIME, function(){
+      assertEqual(value, dummy.getWidth());
+      assertIdentical(true, key);
+    })
+	}},
+	
+	testShiftKeyFalse: function() { with(this) {
+		var value = getRandomInt(10, 100),
+			  key = null;
+		$('dummy').observe('click', function(e){ 
+			this.setStyle({width: value + 'px'});
+			key = e.shiftKey; 
+		})
+		Event.simulateMouse('dummy', 'click', {shiftKey: false});
+    wait(WAIT_TIME, function(){
+      assertEqual(value, dummy.getWidth());
+      assertIdentical(false, key);
+    })
+	}},
+	
+	testMetaKeyTrue: function() { with(this) {
+		var value = getRandomInt(10, 100),
+			  key = null;
+		$('dummy').observe('click', function(e){ 
+			this.setStyle({width: value + 'px'});
+			key = e.metaKey; 
+		})
+		Event.simulateMouse('dummy', 'click', {metaKey: true});
+		wait(WAIT_TIME, function(){
+      assertEqual(value, dummy.getWidth());
+      assertIdentical(true, key);
+    })
+	}},
+	
+	testMetaKeyFalse: function() { with(this) {
+		var value = getRandomInt(10, 100),
+			  key = null;
+		$('dummy').observe('click', function(e){ 
+			this.setStyle({width: value + 'px'});
+			key = e.metaKey; 
+		})
+		Event.simulateMouse('dummy', 'click', {metaKey: false});
+		wait(WAIT_TIME, function(){
+      assertEqual(value, dummy.getWidth());
+      assertIdentical(false, key);
+    })
+	}},
+	
+	testPointerXPointerY: function() { with(this) {
+		var value = getRandomInt(10, 100), 
+			x = null, 
+			y = null;
+		$('dummy').observe('click', function(e){ 
+			this.setStyle({width: value + 'px'}); 
+			x = e.pointerX();
+			y = e.pointerY();
+		})
+		Event.simulateMouse('dummy', 'click', {pointerX: 50, pointerY: 60});
+		wait(WAIT_TIME, function(){
+      assertEqual(value, dummy.getWidth());
+      assertEqual(50, x);
+      assertEqual(60, y);
+    })
+	}},
+	
+	testElement: function() { with(this) {
+		var value = getRandomInt(10, 100), 
+			element = null;
+		$('dummy').observe('click', function(e){ 
+			this.setStyle({width: value + 'px'}); 
+			element = e.element();
+		})
+		wait(WAIT_TIME, function(){
+      Event.simulateMouse('dummy', 'click');
+      assertEqual(value, dummy.getWidth());
+      assertEqual(element, dummy);
+    })
+	}}
+});
+
+// ]]>
+</script>
+</body>
+</html>

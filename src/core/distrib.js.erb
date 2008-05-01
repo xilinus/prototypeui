@@ -1,0 +1,6 @@
+<%= include "../HEADER" %>
+
+if(typeof Prototype == 'undefined' || !Prototype.Version.match("1.6"))
+  throw("Prototype-UI library require Prototype library >= 1.6.0");
+
+<%= include *%w(base class number string array dom options).map { |n| n << '.js' } %>

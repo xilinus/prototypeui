@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>Test Performance</title>
+  <script src="../../../lib/prototype.js" type="text/javascript"></script>
+  <script src="../../../lib/effects.js" type="text/javascript"></script>
+  <script src="../../../dist/window.js" type="text/javascript"></script>
+  <link href="../../../themes/window/window.css" rel="stylesheet" type="text/css">
+  <link href="../../../themes/window/alphacube.css" rel="stylesheet" type="text/css">
+  <style type='text/css'>
+  body {
+    background: #CCC;
+  }
+  </style>
+</head>
+<body>
+
+<script type="text/javascript">
+  var lorem = "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna <b>aliqua</b>. Ut enim ad <i>minim veniam</i>, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. <pre>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</pre></p>"
+  
+  function runTest() {
+    var time = new Date();
+    var windows = [];
+    (20).times(function(i) {
+      var window = new UI.Window();
+      window.setContent(lorem);
+      windows.push(window.show());
+    });
+    var elapsed = new Date() - time;
+    console.log(elapsed);  
+  }  
+  document.whenReady(runTest);
+  
+</script>
+
+</body>
+</html>

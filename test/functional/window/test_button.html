@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>Test Button</title>
+  <script src="../../../lib/prototype.js" type="text/javascript"></script>
+  <script src="../../../lib/effects.js" type="text/javascript"></script>  
+  <script src="../../../dist/window.js" type="text/javascript"></script>
+  
+  <link href="../../../themes/window/window.css" rel="stylesheet" type="text/css">
+  <link href="../../../themes/window/alphacube.css" rel="stylesheet" type="text/css">
+  <style type='text/css'>
+  body {
+    background: #CCC;
+  }
+  
+  .ui-window .buttons a.help {
+    background-color: red;
+    float: left;
+    width: 20px;
+    height: 20px;
+  }
+  
+  </style>
+  
+</head>
+<body>
+
+  </div>
+<script type="text/javascript">   
+  function runTest() {
+    openWindow();
+  } 
+            
+  function help(win) {
+    alert('need some help about: "' + win.id + '" ?')
+  }
+  
+  function openWindow() {      
+    window2 = new UI.Window().addButton('help', help).show();             
+  }                                    
+   
+  document.whenReady(runTest);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+.debug .se_sizer { 
+  border:1px solid #123;
+  background:#FFF;
+  width: 3px;
+  height: 3px;
+}          
+    
+.debug .sw_sizer { 
+  border:1px solid #123;
+  background:#FFF;
+  width: 3px;
+  height: 3px;
+}
+
+.debug .nw_sizer { 
+  border:1px solid #123;
+  background:#FFF;
+  width: 3px;
+  height: 3px;
+}
+
+.debug .ne_sizer { 
+  border:1px solid #123; 
+  background:#FFF;
+  width: 3px;
+  height: 3px;
+}
+
+.debug .n_sizer { 
+  background:#EFAFFF;
+}
+  
+.debug .e_sizer { 
+  background:#BAC5FF;
+}
+
+.debug .s_sizer { 
+  background:#FFBBA3;
+}
+  
+.debug .w_sizer { 
+  background:#8AFFA6;
+} 
+
+.debug .buttons {
+  border:1px solid #123; 
+}

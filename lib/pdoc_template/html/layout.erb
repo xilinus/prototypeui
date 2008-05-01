@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Prototype UI API documentation<%= @title %></title>
+	<meta name="generator" content="PDoc">
+	<%= javascript_include_tag "prototype", "effects", "controls", "application", "code_highlighter" %>
+	<%= stylesheet_link_tag "reset", "main" %>
+	<script type="text/javascript" charset="utf-8">PDoc.pathPrefix = '<%= path_prefix %>';</script>
+</head>
+<body>
+	<div id="header">    
+     <div id="header_content">
+        <a target="_top" id="logo" href="http://www.prototype-ui.com/"/>
+        <div id="links">
+          <a href="http://www.prototype-ui.com/download">Download</a> |
+          <a href="http://docs.prototype-ui.com/">Documentation</a> |
+          <a href="http://dev.prototype-ui.com/">Developer</a> |
+          <a href="http://forums.prototype-ui.com/">Forums</a> 
+        </div>
+      </div>
+	</div>
+	<div id="search_panel">
+	 	<form action="" method="get" accept-charset="utf-8">
+			<div><input type="text" value="search" id="search"></div>
+			<div id="search_list"></div>
+		</form>
+	</div>
+	<div id="main">
+		<div id="sidebar">
+			<ul>         
+			  <h2>Prototype UI</h2>
+			  <h3><%= PUI_DOC_VERSION %></h3>
+				<% @root.sections.each do |section| %>
+					<%= menu(section) %>
+				<% end %>
+			</ul>
+		</div>
+		<div id="content">   
+			<%= @content_for_layout %>
+		</div>
+	</div>
+	<div id="footer">
+		<p>&copy; 2006-<%= Time.now.year %> Prototype Core Team | Licenses:
+		<a rel="license" href="http://dev.rubyonrails.org/browser/spinoffs/prototype/trunk/LICENSE?format=raw">MIT (source code)</a> and <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><abbr title="Creative Commons Attribution-Share Alike 3.0 License">CC BY-SA</abbr> (documentation)</a>.</p>
+	</div>
+</body>
+</html>

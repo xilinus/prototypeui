@@ -1,0 +1,9 @@
+load 'Rakefile'
+
+desc "Create HTML documentation using pdoc"
+task :pdoc => :dist do
+  require 'lib/pdoc'                                                                          
+  FileUtils.rm_rf "pdoc"
+  FileUtils.mkdir "pdoc"
+  PDoc::Generators::Html::Website.new(File.expand_path(File.join(File.dirname(__FILE__), "lib", "pdoc_template", "pdoc.js"))).render
+end     

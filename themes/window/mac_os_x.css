@@ -1,0 +1,184 @@
+.mac_os_x .nw {
+	background:transparent url(mac_os_x/top_unactive.gif) no-repeat scroll 0px 0px;
+	height:22px;
+	padding-left:10px;
+}      
+.mac_os_x_focused .nw {
+	background:transparent url(mac_os_x/top.gif) no-repeat scroll 0px 0px !important;
+}       
+
+.mac_os_x .ne {
+	background:transparent url(mac_os_x/top_unactive.gif) no-repeat scroll right -44px;
+	height:22px;
+	padding-right:10px;
+}
+
+.mac_os_x_focused .ne {
+	background:transparent url(mac_os_x/top.gif) no-repeat scroll right -44px !important;
+}
+
+.mac_os_x .n {
+	background:transparent url(mac_os_x/top_unactive.gif) repeat-x scroll right -22px;
+	color:#17385B;
+	font:normal 14px/26px Arial, sans-serif;
+	height:22px;
+	margin:0;
+	padding:0;
+	text-align:center;
+	overflow: hidden;
+	padding-left:60px;
+	line-height: 20px; 
+	color: #000;
+}
+
+.mac_os_x_focused .n {
+	background:transparent url(mac_os_x/top.gif) repeat-x scroll right -22px !important;
+}
+
+.mac_os_x .content {
+	background:#FFF;
+	color:#000;
+	font:normal 12px/1em Verdana, Arial, sans-serif;
+	overflow:auto;
+}
+
+.mac_os_x .w {
+	border-left:1px solid #DDD;
+	border-right:1px solid #DDD;
+}
+
+.mac_os_x .e {
+	border-left:1px solid #EEE;
+	border-right:1px solid #EEE;
+}
+
+
+.mac_os_x .sw {
+	background:transparent url(mac_os_x/bottom_unactive.gif) no-repeat scroll 0 0px;
+	font-size:2px;
+	height:15px;
+	padding-left:12px;
+}
+
+.mac_os_x_focused .sw {
+	background:transparent url(mac_os_x/bottom.gif) no-repeat scroll 0 0px !important;
+}
+
+.mac_os_x .se {
+	background:transparent url(mac_os_x/bottom_unactive.gif) no-repeat scroll right -30px;
+	font-size:2px;
+	height:15px;
+	padding-right:12px;
+}
+
+.mac_os_x_focused .se {
+	background:transparent url(mac_os_x/bottom.gif) no-repeat scroll right -30px !important;
+}
+
+.mac_os_x_focused .se_sizer { 
+  width:12px;
+  height:12px;
+}          
+ 
+.mac_os_x .se_resize_handle {
+	background:transparent url(mac_os_x/bottom_unactive.gif) no-repeat scroll right -45px;
+	font-size:2px;
+	height:15px;
+	padding-right:12px;
+}                                                                          
+
+.mac_os_x_focused .se_resize_handle {
+	background:transparent url(mac_os_x/bottom.gif) no-repeat scroll right -45px !important;
+}
+
+.mac_os_x .s {
+	background:transparent url(mac_os_x/bottom_unactive.gif) repeat-x scroll 0 -15px;
+	font-size:12px;
+	line-height:15px;
+	height:15px;
+	overflow:hidden;
+} 
+
+.mac_os_x_focused .s {
+	background:transparent url(mac_os_x/bottom.gif) repeat-x scroll 0 -15px !important;
+}
+
+.mac_os_x .buttons {
+  position: absolute;
+  top:1px;
+  left:7px;
+  height: 20px;   
+}
+
+.mac_os_x .buttons a.close {
+  float:left;
+	background:transparent url(mac_os_x/button_unactive.gif) no-repeat 0 0; 
+	background-repeat: no-repeat;
+	height:15px;
+	width:14px;
+	margin: 3px 7px 0 0px;        
+	padding-top:0px; /* padding-top = buttons order, it will be reset to 0, do not use padding, use margin*/       
+	overflow:hidden;
+}
+  
+.mac_os_x_focused .buttons a.close {
+	background:transparent url(mac_os_x/buttons.gif) no-repeat 0 0 !important;    
+	background-repeat: no-repeat;
+}
+
+.mac_os_x .buttons.over a.close {
+	background:transparent url(mac_os_x/buttons_over.gif) no-repeat 0 0px !important; 
+}
+
+.mac_os_x .buttons a.maximize {
+  float:left;
+	background:transparent url(mac_os_x/button_unactive.gif) no-repeat 0 0;
+	height:15px;
+	width:14px;
+	margin: 3px 7px 0 0;
+	padding-top:2px; /* padding-top = buttons order, it will be reset to 0, do not use padding, use margin*/ 
+	overflow:hidden;
+}
+  
+.mac_os_x_focused .buttons a.maximize {
+	background:transparent url(mac_os_x/buttons.gif) no-repeat 0 -30px !important;
+}
+
+.mac_os_x .buttons.over a.maximize {
+	background:transparent url(mac_os_x/buttons_over.gif) no-repeat 0 -30px !important;  
+}
+
+.mac_os_x .buttons a.minimize {
+  float:left;
+	background:transparent url(mac_os_x/button_unactive.gif) no-repeat 0 0;
+	height:15px;
+	width:14px;
+	margin: 3px 7px 0 0;
+	padding-top:1px; /* padding-top = buttons order, it will be reset to 0, do not use padding, use margin*/ 
+	overflow:hidden;
+}  
+
+.mac_os_x_focused .buttons a.minimize {
+	background:transparent url(mac_os_x/buttons.gif) no-repeat 0 -15px !important;
+}
+
+.mac_os_x .buttons.over a.minimize {
+	background:transparent url(mac_os_x/buttons_over.gif) no-repeat 0 -15px !important;
+}         
+
+.mac_os_x .buttons a.minimize.disabled, .mac_os_x .buttons.over a.minimize.disabled  {
+	background:transparent url(leopard/button_unactive.gif) no-repeat 0 0  !important; 
+}
+
+.mac_os_x_overlay {
+	position:absolute;
+	top:0;            
+	left:0;
+	width:100%;
+	background-color:#DDD;
+	filter:alpha(opacity=60);
+	opacity: 0.6;
+	-moz-opacity: 0.6;
+}
+
+

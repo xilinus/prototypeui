@@ -1,0 +1,36 @@
+/* MAC OS X STYLES */
+
+.menu.leopard {
+	width: 12em; 
+	background:#FFF;
+}
+.menu.leopard ul {
+	padding: 2px 0;
+}                 
+.menu.leopard a {
+	color: #333;
+	padding: 0px 15px;
+	margin: 0 0px;
+  font-family: "Lucida Grande" , arial, sans-serif;
+	font-size:14px;  
+	height:22px;
+	line-height:22px;
+}
+.menu.leopard a:hover {
+	background: url(leopard/selected_bg.png);
+	color: #fff;
+}
+.menu.leopard a.disabled {
+	color: #bbb;
+}
+.menu.leopard a.disabled:hover {
+	background: #FFF;
+	color: #bbb;
+}
+.menu.leopard .separator {
+	background: #e2e4e3;
+	height: 1px;
+	margin: 2px;
+	line-height: 1px;   
+	overflow: hidden;
+}

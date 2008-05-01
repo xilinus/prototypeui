@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Calendar example</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <script src="../../../lib/prototype.js" type="text/javascript"></script>
+  <script src="../../../lib/effects.js" type="text/javascript"></script>
+  <script src="../../../dist/calendar.js" type="text/javascript"></script>
+
+  <link href="../../../themes/calendar/calendar.css" rel="stylesheet" type="text/css" />
+  <link href="../../../themes/calendar/mac_os_x.css" rel="stylesheet" type="text/css" />
+  <link href="../../../themes/calendar/ical.css" rel="stylesheet" type="text/css" />
+
+  <style type="text/css" media="screen">
+    body { 
+      margin-top: 0; 
+      padding: 0; 
+      font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana", sans-serif; 
+      font-size: 8pt; 
+    }
+    
+    div.clear {
+      clear:both; margin:5px
+    }
+  </style>
+</head>
+
+<body>
+  
+  <h1>Basic default calendar</h1>
+  <div id="calendar"></div>
+  <div class="clear">&nbsp;</div>
+  <label>Selected Date</label>
+  <br/><br/>
+  <input id="calendar_input" type="text"/>
+  <div class="clear">&nbsp;</div>
+  <label>Starting week day</label>
+  <br/><br/>
+  <select id="calendar_select">
+    <option value="0">Sunday</option>
+    <option value="1">Monday</option>
+    <option value="2">Tuesday</option>
+    <option value="3">Wednesday</option>
+    <option value="4">Thursday</option>
+    <option value="5">Friday</option>
+    <option value="6">Saturday</option>
+  </select> 
+  <div class="clear">&nbsp;</div>
+  
+  <h1>Calendar with custom start date</h1>
+  <div id="calendar2"></div>
+  <div class="clear">&nbsp;</div>
+  
+  <h1>Calendar with custom events</h1>
+  <div id="calendar3"></div>
+  
+  <script type="text/javascript">
+    document.observe('dom:loaded', function(e){
+      this.calendar1 = new UI.Calendar('calendar', {
+        startWeekday: 1,
+        format: '%B %d, %Y'
+      });
+      
+      this.calendar1.observe('click', function(e) {     
+        $('calendar_input').value = e.memo.formattedDate;
+      });
+      
+      $('calendar_select').observe('change', function(e) {
+        this.calendar1.setStartWeekday(e.element().value);
+      }.bind(this));
+      
+      this.calendar2 = new UI.Calendar('calendar2', {
+        theme: 'ical'
+      });
+      
+      this.calendar3 = new UI.Calendar('calendar3', {
+        format: '%b %d, %Y'
+      });
+      
+      this.calendar3.observe('click', function(e) {
+        alert(e.memo.formattedDate);
+      });
+    }.bind(this));
+  </script>
+</body>
+</html>

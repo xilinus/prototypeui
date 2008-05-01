@@ -1,0 +1,135 @@
+/* Main holder (contains li)*/
+.pui-autocomplete-holder  {
+   margin: 0; 
+   border: 1px solid #999; 
+   overflow: hidden; 
+   padding: 0px 5px;      
+   font:normal 12px Verdana, Arial, sans-serif;     
+   height: auto !important; 
+   height: 1%;
+   width: 400px;
+} 
+
+.pui-autocomplete-holder li {   
+  float: left;       
+  position: relative;
+  list-style-type: none; 
+  margin: 4px 0 ; 
+}         
+
+/* Input field */
+.pui-autocomplete-holder li.pui-autocomplete-input {
+  margin: 2px 0; 
+  height: 20px;
+}  
+
+.pui-autocomplete-input input { 
+  float:left;
+  width: 100%; 
+  border: 0;
+  padding: 0;
+  margin: 0;      
+  outline: 0;  
+  height: 20px;
+  line-height: 20px;
+  font-size:13px;
+}
+
+/* Entry */
+.pui-autocomplete-holder li.pui-autocomplete-box { 
+  height:16px;   
+  margin-right:2px;
+  background:url(default/item_left.gif) no-repeat;
+  overflow:hidden;
+}                                                    
+.pui-autocomplete-holder li.pui-autocomplete-box span { 
+  float:left;  
+  position: relative;   
+  margin:0;
+  padding:0 20px 0 5px;
+  height:16px;   
+  background:url(default/item_right.gif) no-repeat right center;
+}
+
+/* Selected entry */
+.pui-autocomplete-holder li.pui-autocomplete-box.pui-autocomplete-selected { 
+  background-image:url(default/item_selected_left.gif);
+  color: #FFF;
+}   
+
+.pui-autocomplete-holder li.pui-autocomplete-box.pui-autocomplete-selected span { 
+  background-image:url(default/item_selected_right.gif);
+  color: #FFF;
+}                                                                     
+
+/* Over entry */
+.pui-autocomplete-holder li.pui-autocomplete-box.pui-autocomplete-over { 
+  background-image:url(default/item_over_left.gif);
+}   
+
+.pui-autocomplete-holder li.pui-autocomplete-box.pui-autocomplete-over span { 
+  background-image:url(default/item_over_right.gif);
+}
+
+/* Remove button */
+.pui-autocomplete-holder li.pui-autocomplete-box a { 
+  position: absolute; 
+  right: 6px; 
+  top: 5px; 
+  display: block; 
+  width: 7px; 
+  height: 7px; 
+  font-size: 1px; 
+  background: url('default/close.gif'); 
+}
+
+.pui-autocomplete-holder li.pui-autocomplete-box a:hover { 
+  background-position: 7px; 
+}                   
+
+.pui-autocomplete-holder li.pui-autocomplete-selected a, .pui-autocomplete-holder li.pui-autocomplete-selected a:hover { 
+  background-position: bottom; 
+}        
+
+/* Auto completion */
+.pui-autocomplete-result {      
+  position: absolute; 
+  top:0;
+  left:0;
+  border:1px solid #CCCCCC;
+  background: #EEE;
+  font:normal 12px Verdana, Arial, sans-serif;
+}
+
+.pui-autocomplete-message {
+  padding:5px 7px;
+} 
+       
+.pui-autocomplete-result ul { 
+  margin:0;
+  padding:0;
+}
+
+.pui-autocomplete-result ul li { 
+  padding: 5px 12px; 
+  margin: 0; 
+  list-style-type: none; 
+  border-bottom: 1px solid #ccc; 
+  border-width: 0 1px 1px; 
+}
+
+.pui-autocomplete-result ul li em { 
+  font-weight: bold; 
+  font-style: normal; 
+}
+
+.pui-autocomplete-result ul li.pui-autocomplete-current { 
+  background: #4173CC; 
+  color: #fff; 
+}
+
+.pui-autocomplete-result ul li.pui-autocomplete-current em { 
+  background: none;
+  color:#000;
+}
+      

@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>PWC unit test</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="../assets/test.css" type="text/css" />
+
+  <script src="../../lib/prototype.js" type="text/javascript"></script>
+  <script src="../../lib/effects.js" type="text/javascript"></script>
+  <script src="../lib/unittest.js" type="text/javascript"></script>
+  <script src="../../dist/window.js" type="text/javascript"></script>
+</head>
+<body>
+
+<div id="content">
+
+  <div id="header">
+    <h1>PWC unit test file</h1>
+    <p>
+      This file tests UI.Window object from <strong>src/window.js</strong>.
+    </p>
+  </div>
+
+  <!-- Log output -->
+  <div id="testlog"> </div>
+
+</div>
+
+<script type="text/javascript">
+// <![CDATA[
+  new Test.Unit.Runner({
+    setup: function() {
+      win = new UI.Window();
+    },
+    
+    teardown: function() {
+      win.destroy();
+    },
+        
+    testShouldCreateWindowObject: function() { with(this) {
+      assertInstanceOf(UI.Window, win);  
+      wait(100, function() {
+        // Check default values (and attAccessor)
+        assertEqual(1, win.getGridX());
+        assertEqual(1, win.getGridY());
+        assertEqual(100, win.getMinWidth());
+        assertEqual(null, win.getMaxWidth());
+        assertEqual(100, win.getMinHeight());
+        assertEqual(null, win.getMaxHeight());
+      })
+    }},
+    
+    testRender: function(){with(this){
+      assert(!$(win.id));
+      
+      win.show();
+      
+      wait(100, function(){
+        assert($(win.id), "Window isn't in the DOM");
+        assert(win.visible, "Window is visible but visible is false");
+        
+        var bounds = win.getBounds();
+        assertEqual(win.element.getWidth(), bounds.width);
+        assertEqual(win.element.getHeight(), bounds.height);
+        assertEqual(parseInt(win.element.style.top), bounds.top);
+        assertEqual(parseInt(win.element.style.left), bounds.left);
+        
+        win.hide();
+        
+        wait(100, function(){
+          assert(!$(win.id), "Window is still in the DOM");
+          assert(!win.visible, "Window isn't visible but visible is true");
+        });
+      });
+    }},
+    
+    testAltitude: function() { with(this) {
+      assertEqual(0, win.getAltitude());
+      
+      var windows = [win,  new UI.Window(),  new UI.Window(),  new UI.Window()]       
+      assertEnumEqual([0, 1, 2, 3], UI.defaultWM.windows().collect(function(win){return windows.indexOf(win)}))
+      
+      windows[2].bringToFront();
+      assertEnumEqual([0, 1, 3, 2],UI.defaultWM.windows().collect(function(win){return windows.indexOf(win)}))
+     
+      windows[1].sendToBack();
+      assertEnumEqual([1, 0, 3, 2],UI.defaultWM.windows().collect(function(win){return windows.indexOf(win)}))
+
+      windows[2].setAltitude(1);
+      assertEnumEqual([1, 2, 0, 3],UI.defaultWM.windows().collect(function(win){return windows.indexOf(win)}))
+    }},  
+
+    testTheme: function() { with(this) {
+      assertEqual("alphacube", win.getTheme());
+      assert(win.element.hasClassName("alphacube"));
+          
+      var win2 = new UI.Window({ theme: "foo" });
+      assertEqual("foo", win2.getTheme());
+        
+      UI.defaultWM.setTheme("bar");
+      
+      assertEqual("bar", win.getTheme());
+      assertEqual("foo", win2.getTheme());
+      
+      win2.destroy();
+    }},  
+  
+    testShouldSnapToGrid: function() { with(this) {
+      var win = new UI.Window({gridX: 10, gridY: 50, top: 122, left: 15, width: 145, height: 320}); 
+      win.show();  
+      wait(200, function() {
+        assertEqual(100, win.getPosition().top);     
+        assertEqual(10, win.getPosition().left); 
+        assertEqual(140, win.getSize().width);     
+        assertEqual(300, win.getSize().height);     
+        win.destroy();
+      })
+    }},
+    
+    testShouldCenter: function() { with(this) {     
+      var element = new Element("div", {style:"position:absolute; top:1990px; height:10px; width:10px"});   
+      document.body.appendChild(element);
+      
+      var viewport = win.windowManager.viewport;
+      
+      viewport.setScrollOffset({ top:200, left:0 })  
+
+      var viewportArea = viewport.getDimensions(); 
+      var offset      = viewport.getScrollOffset();
+
+      win.center({auto: true}).show(); 
+      
+      var position = win.getPosition();
+      assertEqual(parseInt(offset.top +  (viewportArea.height - 300)/2) , position.top);     
+      assertEqual(parseInt(offset.left + (viewportArea.width - 200)/2)  , position.left);     
+
+      win.windowManager.viewport.setScrollOffset({top:300, left:0});
+      wait(200, function() {
+        assertEqual(win.getPosition().top , position.top + 100);     
+        element.remove();
+      })  
+    }},
+    
+    testSetAjaxContent: function(){with(this){
+      var completed = created = false, array = [];
+      
+      win.setAjaxContent('../fixtures/ajax_content.html', {
+        method: 'get',
+        
+        onCreate: function(req) {
+          created = true;
+          assertEqual(win, this, "'this' doesn't refer to the window");
+        },
+        
+        onComplete: function(req) {
+          completed = true;
+          assertEqual(win, this, "'this' doesn't refer to the window");
+        }
+      });
+    
+      assert(created, "onCreate callback not called");
+    
+      wait(200, function() {
+        assertEqual('<p>this content has been set by an ajax request!</p>', win.content.innerHTML.toLowerCase());
+        assert(completed, "onComplete callback not called");
+      });
+    }},
+    
+    testGetWindow: function(){with(this) {
+      win.setContent('<p><strong>OK</strong></p>');
+      
+      win.show();
+      wait(200, function() {
+        assertIdentical(win, UI.defaultWM.getWindow(win.element));
+        assertIdentical(win, UI.defaultWM.getWindow(win.content.down('p')));
+        assertIdentical(win, UI.defaultWM.getWindow(win.content.down('strong')));
+      })
+    }}
+    
+  }, "testlog");
+// ]]>
+</script>
+</body>
+</html>

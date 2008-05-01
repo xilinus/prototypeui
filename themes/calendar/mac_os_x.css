@@ -1,0 +1,76 @@
+.mac_os_x .ui_calendar_container {
+  padding: 5px;
+}
+.mac_os_x .ui_calendar {
+  border-collapse: collapse;
+  border-spacing: 0pt;
+}
+.mac_os_x .ui_calendar th { 
+  vertical-align: middle; 
+  width: 1.8em;
+}
+.mac_os_x .ui_calendar th .prev, 
+.mac_os_x .ui_calendar th .next {
+  cursor: pointer;
+  top: 0pt;
+  bottom: 0pt;
+  width: 13px;
+  display: block;
+  position: absolute;
+} 
+.mac_os_x .ui_calendar th .prev { 
+  left: 0px;
+  margin-left: 0.4em;
+  background: transparent url(mac_os_x/buttons-sprite.png) no-repeat 0px 0px;
+}
+.mac_os_x .ui_calendar th .next {
+  right: 0px;
+  margin-right: 0.4em;
+  background: transparent url(mac_os_x/buttons-sprite.png) no-repeat -26px 0px;
+}
+.mac_os_x .ui_calendar th .header {
+  font-weight: bold;
+  text-align: center;
+  position: relative;
+  width: 100%;
+  line-height: 14px;
+  vertical-align: top;
+  margin-bottom: 5px;
+}
+.mac_os_x .ui_calendar td {
+  background: #ffffff url(mac_os_x/day-sprite.png) repeat-x -32px 0px;
+  text-align: center;
+  height: 16px;
+  line-height: 16px;
+}
+.mac_os_x .ui_calendar td a {
+  color: #000000;
+  display: block;
+  text-decoration: none;
+}
+.mac_os_x .ui_calendar td.today {
+  background: #ffffff url(mac_os_x/today-sprite.png) repeat-x -32px 0px; 
+}
+.mac_os_x .ui_calendar td.today a { 
+  color: #ffffff; 
+}
+.mac_os_x .ui_calendar td.selected { 
+  background: #ffffff url(mac_os_x/selectday-sprite.png) repeat-x -32px 0px;
+}
+.mac_os_x .ui_calendar td.selected a { 
+  font-weight: bold; 
+  color: #ffffff;
+}
+.mac_os_x .ui_calendar td.non_current { 
+  color: #A6A6A6; 
+  cursor: default; 
+}
+.mac_os_x .ui_calendar td.first { 
+  background-position: 0px -18px;
+}
+.mac_os_x .ui_calendar td.last { 
+  background-position: top right;
+}
+.mac_os_x .ui_calendar td.outside { 
+  color: silver; 
+}

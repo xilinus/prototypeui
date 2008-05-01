@@ -1,0 +1,6 @@
+#info {      
+  position: absolute;
+  left: expression( ignoreMe = document.documentElement.scrollLeft + 'px' );
+  top: expression( ignoreMe2 = document.documentElement.scrollTop  + 'px' );     
+	filter:alpha(opacity=80);
+}

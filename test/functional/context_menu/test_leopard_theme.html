@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <title>Test Shadow Class</title>
+  
+  <script src="../../../lib/prototype.js" type="text/javascript"></script>
+  <script src="../../../lib/effects.js" type="text/javascript"></script>
+  <script src="../../../dist/context_menu.js" type="text/javascript"></script>
+  
+  <link href="../../../themes/context_menu/context_menu.css" rel="stylesheet" type="text/css" />
+  <link href="../../../themes/context_menu/leopard.css" rel="stylesheet" type="text/css" />
+  <link href="../../../themes/shadow/leopard.css" rel="stylesheet" type="text/css"> 
+
+  <style type='text/css'>
+  body { 
+    background: url('../assets/body_bg.png') repeat; 
+  }
+  #contextAreaLeopoard {
+    background: #eef;
+    height: 100px;
+    margin: 5px;
+    padding: 20px; 
+    color: #888; 
+    font-size: 48px;
+  }
+  #options {
+    margin: 1em 0 0 0.5em;
+    font: 0.9em "Courier New", Courier, monospace;
+    list-style-type: none;
+  }
+  #options label {
+    float: left;
+    margin-right: 1em;
+    width: 6em;
+    text-align: right;
+  }
+  </style>
+  
+</head>
+<body>  
+  <div id="contextAreaLeopoard">Leopard Theme</div>
+  <ul id="options">
+    <li>
+      <label for="showEffect">showEffect</label>
+      <input type="checkbox" name="showEffect" id="showEffect" value="" />
+    </li>
+    <li>
+      <label for="hideEffect">hideEffect</label>
+      <input type="checkbox" name="hideEffect" id="hideEffect" value="" />
+    </li>
+    <li>
+      <label for="shadow">shadow</label>
+      <input type="checkbox" name="shadow" id="shadow" checked="checked" />
+    </li>
+  </ul>
+      
+  <script type="text/javascript">
+    function runTest() {   
+      var myMenuItems = [
+        {
+          name: 'Add', 
+          className: 'add', 
+          callback: function(e) {
+            e.stop();
+            alert('you clicked "add" option on <' + e.element().tagName.toLowerCase() + '> element');
+          }
+        },{
+          name: 'Edit',
+          className: 'edit', 
+          callback: function(e) { e.stop(); alert('Forward function called'); }
+        },{
+          separator: true
+        },{
+          name: 'Save as...', 
+          submenu: [{
+            name: '.doc',
+            callback: function(e) { e.stop(); alert('saving as .doc'); }
+          }, {
+            name: '.xsl',
+            callback: function(e) { e.stop(); alert('saving as .xsl'); }
+          }, {
+            name: '.pdf',
+            callback: function(e) { e.stop(); alert('saving as .pdf'); }
+          }]
+        },{
+          name: 'Disabled option',
+          disabled: true
+        }
+      ]
+      
+      new UI.ContextMenu({
+        selector: '#contextAreaLeopoard',
+        className: 'menu leopard',    
+        shadow:    'leopard',
+        menuItems: myMenuItems
+      })
+    }  
+    document.whenReady(runTest);
+  </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+.ui_calendar_container {
+  position: relative;
+  float: left;
+}
+.ui_calendar_container label {
+  display:block;
+}
+.ui_calendar_container .selector {
+  background-color: #ffffff;
+  width: 110px;
+  padding: 10px;
+  border:1px solid #808080;
+}
+.ui_calendar_container .ui_calendar_button_div {
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+}
+.ui_calendar_container a {
+  text-decoration: none;
+}
+.ui_calendar_container .ui_calendar_mask {
+  display: block;
+  background-color: #000000;
+  opacity: 0.50;
+  height: 100%;
+  width: 100%;
+  left: 0pt;
+  top: 0pt;
+  margin: 0pt;
+  padding: 0pt;
+  position: absolute;
+  z-index: 2;
+  float: left;
+}

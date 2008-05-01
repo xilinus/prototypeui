@@ -1,0 +1,33 @@
+/* MAC OS X STYLES */
+
+.menu.mac_os_x {
+	width: 12em;
+	background: url(mac_os_x/bg.png) repeat;
+}
+.menu.mac_os_x ul {
+	border: 1px solid #c3c3c3;
+	padding: 2px 0;
+}
+.menu.mac_os_x a {
+	color: #555;
+	padding: 2px 15px;
+	margin: 0 2px;
+}
+.menu.mac_os_x a:hover {
+	background: #3875D7;
+	color: #fff;
+}
+.menu.mac_os_x a.disabled {
+	color: #bbb;
+}
+.menu.mac_os_x a.disabled:hover {
+	background: url(mac_os_x/bg.png) repeat;
+	color: #bbb;
+}
+.menu.mac_os_x .separator {
+	background: url(mac_os_x/separator.png) repeat-x;  
+	height: 2px;
+	margin: 2px;   
+	line-height: 1px;   
+	overflow: hidden;
+}

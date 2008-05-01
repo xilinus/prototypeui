@@ -1,0 +1,86 @@
+.ui-window {
+  position: absolute;
+}
+
+.ui-window .move_handle { 
+  cursor:move !important;
+}
+
+/*.ui-window .e {
+  position: relative;
+}*/
+
+.ui-window .resize_handle {
+  line-height: 1px;
+  font-size:1px;
+  width: 8px;
+  height: 8px;
+  z-index: 90;
+  position: absolute;
+}
+
+.ui-window .se_sizer { 
+  cursor: se-resize;
+  z-index: 100;
+  bottom:0;
+  right:0;
+}          
+    
+.ui-window .sw_sizer { 
+  cursor: sw-resize;
+  z-index: 100;
+  bottom:0;
+  left:0;  
+}
+
+.ui-window .nw_sizer { 
+  cursor: nw-resize;
+  z-index: 100;
+  top:0;
+  left:0;  
+}
+
+.ui-window .ne_sizer { 
+  cursor: ne-resize;
+  z-index: 100;
+  top:0;
+  right:0;  
+}
+            
+.ui-window .n_sizer { 
+  cursor: n-resize;
+  width:100%;
+  top:0;
+  left:0;  
+}
+ 
+.ui-window .s_sizer { 
+  cursor: s-resize;
+  width: 100%;
+  bottom:0;
+  left:0;
+}
+
+.ui-window .e_sizer { 
+  cursor: e-resize;
+  height:100%;
+  top:0;
+  right:0;  
+}
+
+.ui-window .w_sizer { 
+  cursor: w-resize;
+  height:100%;
+  top:0;
+  left:0;  
+}
+
+.ui-window .content {
+  overflow: auto;
+  position: relative;
+}
+
+html>body .ui-window .content {
+  /* fixes an unbelievable rendering bug in Safari 2 */
+  border-top: 1px solid transparent;
+}

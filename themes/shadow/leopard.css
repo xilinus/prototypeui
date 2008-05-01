@@ -1,0 +1,66 @@
+.shadow_container.leopard .shadow_center_wrapper {
+  float:left;
+  width:100%;
+}              
+
+.shadow_container.leopard .shadow_right {
+  float:left;
+	width:30px;
+  margin-left:-30px
+}  
+
+.shadow_container.leopard .shadow_left {
+  float:left;
+  margin-left:-100%;
+ 	width:30px;
+}
+
+.shadow_container.leopard .se_shadow {
+  background:url(leopard/se.png);
+  height:30px;   
+}
+
+.shadow_container.leopard .s_shadow {
+  background:url(leopard/s.png);
+  height:30px;
+  margin: 0 30px;
+}
+
+.shadow_container.leopard .sw_shadow {
+  background:url(leopard/sw.png);
+  height:30px;
+}
+
+.shadow_container.leopard .ne_shadow {
+  background:url(leopard/ne.png);
+  height:30px;
+}
+
+.shadow_container.leopard .n_shadow {
+  background:url(leopard/n.png);
+  height:30px; 
+  margin: 0 30px;
+}
+
+.shadow_container.leopard .nw_shadow {
+  background:url(leopard/nw.png);
+  height:30px;
+}
+
+.shadow_container.leopard .e_shadow {
+  background:url(leopard/e.png) repeat-y;
+  height:100%;
+}
+
+.shadow_container.leopard .w_shadow {
+  background:url(leopard/w.png) repeat-y;
+  height:100%;
+}
+
+.shadow_container.leopard .c_shadow {     
+  height:100%;               
+  /* Padding is used to set shift values for unfocused window */
+  margin:12px 12px 10px 10px;
+  /* Maring is used to set shift values for focused window */
+  margin:12px 12px 10px 10px;
+}

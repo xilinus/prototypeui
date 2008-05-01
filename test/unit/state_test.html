@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>PWC unit test</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="../assets/test.css" type="text/css" />
+
+  <script src="../../lib/prototype.js" type="text/javascript"></script>
+  <script src="../lib/unittest.js" type="text/javascript"></script>
+  
+  <script src="../../dist/util.js" type="text/javascript"></script>  
+</head>
+<body>
+
+<div id="content">
+  <div id="header">
+    <h1>PWC unit test file</h1>
+    <p>
+      This file tests utility functions from <strong>src/util/history.js</strong>.
+    </p>
+  </div>
+
+  <!-- Log output -->
+  <div id="testlog"> </div>
+</div>
+
+<script type="text/javascript">
+// <![CDATA[
+  
+  var initialHistory = location.hash ? location.hash.substr(1) : null;
+  var fired = false, previousFragment, fragment;
+  var onDomLoad = { };
+  
+  document.observe('state:changed', function(event) {
+    fired = true;
+    fragment = event.memo.value;
+    previousFragment = event.memo.previousValue;
+  });
+  
+  // Use whenReady because observe('dom:loaded') handlers are not ordered !
+  document.whenReady(function() {
+    onDomLoad.fired = fired;
+    onDomLoad.fragment = fragment;
+    onDomLoad.previousFragment = previousFragment;
+  });
+
+  new Test.Unit.Runner({
+    teardown: function() {
+      fired = false;
+      previousFragment = null;
+      fragment = null;
+      location.hash = 'teardown';
+    },
+    
+    testEventShouldBeFiredOnLoadIfAndOnlyIfInitialHistoryIsntBlank: function() {with(this) {
+      if (initialHistory) {
+        assert(onDomLoad.fired);
+        assertEqual(fragment, onDomLoad.fragment);
+        assertEqual(null, onDomLoad.previousFragment);
+      } else {
+        assert(!onDomLoad.fired);
+      }
+    }},
+    
+    testHistoryChangeMethodShouldFireEvent: function() {with(this) {
+      UI.State.change('test');
+      wait(200, function() {
+        assert(fired);
+        assertEqual('test', fragment);
+        assertEqual(initialHistory, previousFragment);
+      });
+    }},
+    
+    testBrowserHistoryChangesShouldFireEvent: function() {with(this) {
+      UI.State.change('previewing');
+      wait(200, function() {
+        UI.State.change('editing');
+        wait(200, function() {
+          assertEqual('editing', fragment);
+          assertEqual('previewing', previousFragment);
+          history.back();
+          wait(200, function() {
+            assertEqual('previewing', fragment);
+            assertEqual('editing', previousFragment);
+            history.forward();
+            wait(200, function() {
+              assertEqual('editing', fragment);
+              assertEqual('previewing', previousFragment);
+              UI.State.change('publishing');
+              wait(200, function() {
+                assertEqual('publishing', fragment);
+                assertEqual('editing', previousFragment);
+              });
+            })
+          })
+        });
+      });
+    }}
+  }, "testlog");
+// ]]>
+</script>
+</body>
+</html>

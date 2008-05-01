@@ -1,0 +1,70 @@
+.ical .ui_calendar_container {
+  background: transparent url(ical/container-background.png) top left repeat-x;
+}
+.ical .ui_calendar {
+  border-collapse: collapse;
+  border-spacing: 0pt;
+}
+.ical .ui_calendar td {
+  border: 0px solid #a9bacc;
+  height: 25px;
+  width: 27px;
+  line-height: 25px;
+  background: transparent url(ical/cell-background.png) top left no-repeat;
+  padding: 0px;
+}
+.ical .ui_calendar thead {
+  height: 36px;
+  background: transparent url(ical/thead-background.png) top left repeat-x;
+}
+.ical .ui_calendar td, .ical .ui_calendar td a {
+  font-size: 9pt;
+  font-weight: bold;
+  text-align: center;
+  color: #333333;
+}
+.ical .ui_calendar td a {
+  display: block;
+  text-decoration:none;
+}
+.ical .ui_calendar td.selected { 
+  background: #0072e2 url(ical/selected-cell.png) top left repeat-x;
+}
+.ical .ui_calendar td.selected_next { 
+  background: #0072e2 url(ical/selected-right-cell.png) top left repeat-x;
+}
+.ical .ui_calendar td.selected, .ical .ui_calendar td.selected a, 
+.ical .ui_calendar td.today, .ical .ui_calendar td.today a {
+  color: #ffffff;
+}
+.ical .ui_calendar td.today {
+  background: #ffffff url(ical/today-cell.png) no-repeat top left; 
+}
+.ical .ui_calendar td.non_current { 
+  background: #ffffff url(ical/cell-outside.png) no-repeat top left; 
+}
+.ical .ui_calendar td.non_current, .ical .ui_calendar td.non_current a {
+  color: #a4a4a4; 
+}
+.ical .ui_calendar th .prev, 
+.ical .ui_calendar th .next {
+  cursor: pointer;
+  top: 0pt;
+  bottom: 0pt;
+  width: 13px;
+  display: block;
+  position: absolute;
+} 
+.ical .ui_calendar th .prev { 
+  left: 0px;
+  margin-left: 0.4em;
+  background: transparent url(ical/buttons-sprite.png) no-repeat 0px 0px;
+}
+.ical .ui_calendar th .next {
+  right: 0px;
+  margin-right: 0.4em;
+  background: transparent url(ical/buttons-sprite.png) no-repeat -26px 0px;
+}
+.ical .header a {
+  color: #3c3c3c;
+}

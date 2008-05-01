@@ -1,0 +1,10 @@
+/* BUTTONS CONTAINER */    
+.ui-dialog-buttons {
+  text-align: center;
+  float:left;
+  width:100%;
+}
+.ui-window .n {
+  padding-left:0 !important;
+  padding-right:0 !important;
+}                   

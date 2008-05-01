@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>Test Drag Helper</title>
+  <script src="../../../lib/prototype.js" type="text/javascript"></script>
+  <script src="../../../lib/effects.js" type="text/javascript"></script>
+  <script src="../../../dist/util.js" type="text/javascript"></script>
+
+  <style type='text/css'>
+    body { 
+      background: url('../../assets/body_bg.png') repeat;    
+      margin:0;
+      padding:0;
+    }     
+    p {
+      margin:0;
+      padding:0;
+    }
+                       
+    #log {
+      background-color: black;
+      color: white;
+      font-family: Monaco, monospace;
+      font-size: 11px;
+      position: absolute;
+      bottom: 0px;
+      width: 100%;
+      height: 100px;
+      overflow: auto;
+    }
+    
+    #test p {
+      border: 1px solid black;
+      height: 100px;
+      width: 200px;
+      position: absolute;
+    }
+    
+    #resizable { left: 100px; top: 50px; }
+    #movable { left: 100px; top: 200px; }
+    #events { left: 400px; top: 50px; }
+    #nothing { left: 400px;  top: 200px; }    
+  </style>
+  
+</head>
+<body>
+  <div id="log">Log :</div>
+  
+  <div id="test">
+    <p id="resizable" class="draggable">
+      Engaging a drag should <strong>resize</strong> this element.
+    </p>
+  
+    <p id="movable" class="draggable movable">
+      Engaging a drag should <strong>move</strong> this element.
+    </p>
+  
+    <p id="events" class="draggable">
+      Engaging a drag should do nothing but fire drag events.
+      Clicking <a id="link" href="#" onmousedown="alert('ok (inline)')">here</a> should alert <b>ok</b> twice.
+    </p>
+  
+    <p id="nothing">
+      Engaging a drag should do nothing.
+    </p>
+  </div>
+  
+  <script type="text/javascript">//<![CDATA[
+    Event.observe(window, 'load', function() {
+      $$('.draggable').invoke('enableDrag');
+      
+      $('link').observe('mousedown', function(event) {
+		    alert('ok (observe)');
+		    event.stop();
+  	  });
+     
+      $w(' drag:started drag:updated drag:ended ').each(function(eventName) {
+        document.observe(eventName, function(event) { 
+          var drag = event.memo;
+          UI.logger.info("document: " + eventName + ": "+ Object.toJSON({
+            element: event.element().inspect(),
+            pointerX: drag.mouseEvent.pointerX(),
+            pointerY: drag.mouseEvent.pointerY(),
+            dx: drag.dx,
+            dy: drag.dy
+          }));
+        });
+      });
+      
+      $('resizable').observe('drag:started', function(event) {
+        this._dimensions = this.getDimensions();
+        event.preventDefault();
+      }).observe('drag:updated', function(event) {
+        var drag = event.memo;
+        this.setStyle({
+          width:  this._dimensions.width  + drag.dx + 'px',
+          height: this._dimensions.height + drag.dy + 'px'
+        });
+      });
+      
+      $$('.movable').invoke('observe', 'drag:started', function(event){
+        event.preventDefault();
+        this._position = this.positionedOffset();
+      }).invoke('observe', 'drag:updated', function(event) {
+        var drag = event.memo;
+        this.setStyle({
+          left: this._position[0] + drag.dx + 'px',
+          top:  this._position[1] + drag.dy + 'px'
+        });
+      });
+      
+    });
+  //]]></script>
+</body>
+</html>

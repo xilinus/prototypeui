@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" debug="false">
+<head>
+	<title>Test Login Dialog</title>
+  <script src="../../../lib/prototype.js" type="text/javascript"></script>
+  <script src="../../../lib/effects.js" type="text/javascript"></script>  
+  <script src="../../../dist/window.js" type="text/javascript"></script>
+
+  <link href="../../../themes/window/window.css" rel="stylesheet" type="text/css">
+  <link href="../../../themes/dialog/famfamfam.css" rel="stylesheet" type="text/css">
+  <link href="../../../themes/window/alphacube.css" rel="stylesheet" type="text/css">
+  <link href="../../../themes/shadow/mac_shadow.css" rel="stylesheet" type="text/css">
+  
+  <style type='text/css'>
+  body {
+    background: #CCC;
+  }
+  .login_label, .login_input  {
+    padding:10px;
+    color:#000;
+    text-align:left;
+    float:left; 
+    width:100px;
+    font-size:20px;
+    color:#64355A;
+  } 
+
+  .login_input {
+    width:200px;
+  }
+
+  .login_error {
+    float:left;
+    width:400px;
+    color:#F00;
+    text-align:center;
+    font-size:16px;
+ }
+
+  .login_input input {
+    width:100%;
+  }
+
+  #login p {
+    width: 400px;
+    margin:0;
+    padding:0;
+  }
+  </style>
+  
+</head>
+<body>   
+  <a href="#" onclick="openLoginPanel(); return false">Open Login Panel</a>
+
+  <div id="login" style="display:none">
+    <p>
+      <span class="login_error">&nbsp;</span>
+    </p>
+    <p>
+      <span class="login_label">login</span> 
+      <span class="login_input"><input type="text"/></span>
+    </p>
+    <p>
+      <span class="login_label">password</span> 
+      <span class="login_input"><input type="password"/></span>
+    </p>
+  </div>
+             
+<script type="text/javascript">   
+  function openLoginPanel() {
+    var dialog = new UI.Dialog({height:180, width: 410, shadow: true, show: Element.appear, hide: Element.fade})
+      .center()
+      .setHeader("Open a new sesssion")
+      .setContent($("login").cloneNode(true).show())
+      .show(true)
+      .focus();         
+    
+    dialog.getDialogButton(0).callback = function() {
+      dialog.element.shake();  
+      dialog.shadow.shadow.shake();  
+      dialog.element.down(".login_error").update("Login/Password incorrect");
+      return false;
+    }
+  } 
+            
+  document.whenReady(openLoginPanel) 
+</script>
+
+</body>
+</html>

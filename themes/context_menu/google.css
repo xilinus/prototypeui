@@ -1,0 +1,32 @@
+/* GOOGLE STYLES */
+
+.menu.google {
+	width: 10.5em;
+	background: #fff;
+}
+.menu.google ul {
+	border-top: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-bottom: 1px solid #676767;
+	border-right: 1px solid #676767;
+}
+.menu.google a {
+	color: #00c;
+	text-decoration: none;
+	padding: 2px 5px;
+	cursor: pointer;
+	font-size: 12px;
+}
+.menu.google a:hover {
+	background: #D3E3FE;
+}
+.menu.google a.disabled {
+	color: #bbb;
+}
+.menu.google a.disabled:hover {
+	background: #fff;
+	color: #bbb;
+}
+.menu.google .separator {
+	background: #ccc;
+}

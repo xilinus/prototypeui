@@ -1,0 +1,35 @@
+/* DESKTOP STYLES */
+
+.menu.desktop {
+	width: 14em;
+	background: #f9f8f7;
+}
+.menu.desktop ul{
+	border: 1px solid #666;
+	padding: 1px 0;
+}
+.menu.desktop a {
+	color: #555;
+	padding: 3px 0 3px 25px;
+	margin: 0 1px;
+	border: 1px solid #f9f8f7;
+	cursor: pointer;
+}
+.menu.desktop a.disabled {
+	color: #bbb;
+	cursor: default;
+}
+.menu.desktop .separator {
+	border-bottom: 1px solid #fff;
+	background: #999;
+	margin: 2px 4px;
+}
+.menu.desktop a:hover {
+	background-color: #b6bdd2;
+	border: 1px solid #0a246a;
+}
+.menu.desktop a.disabled:hover {
+	background: #f9f8f7;
+	color: #bbb;
+	border: 1px solid #f9f8f7;
+}

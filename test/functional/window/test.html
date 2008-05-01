@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" debug="false">
+<head>
+	<title>Test PWC</title>
+  <script src="../../../lib/prototype.js" type="text/javascript"></script>
+  <script src="../../../lib/effects.js" type="text/javascript"></script>  
+  <script src="../../../dist/prototype-ui.js" type="text/javascript"></script>
+
+  <link href="../../../themes/window/window.css" rel="stylesheet" type="text/css">
+  <link href="../../../themes/window/mac_os_x.css" rel="stylesheet" type="text/css">
+  <link href="../../../themes/shadow/mac_shadow.css" rel="stylesheet" type="text/css">
+  
+  <style type='text/css'>
+  body {
+    background: #CCC;
+  }  
+  </style>
+  
+</head>
+<body>
+  <a href="#" onclick="openWindow(); return false;">Open window</a>
+  <br/>
+  Add Select box for testing iFrameShim on IE<br/>
+  <select>
+    <option>option 1</option>
+  	<option>option 2</option>
+  	<option>option 3</option>
+  </select>     
+  <br/>
+  <select>
+    <option>option 1</option>
+  	<option>option 2</option>
+  	<option>option 3</option>
+  </select> 
+  
+<script type="text/javascript">   
+  function runTest() {
+    CSS.preloadImages();
+    openWindow();
+  } 
+            
+  function openWindow() {      
+    new UI.Window({theme: "mac_os_x", shadow: true }).show();
+  }                                    
+   
+  document.whenReady(runTest);
+  CSS.preloadImages();
+</script>
+
+</body>
+</html>

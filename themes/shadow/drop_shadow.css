@@ -1,0 +1,72 @@
+.shadow_container.drop_shadow .shadow_center_wrapper {
+  float:left;
+  width:100%;
+}
+.shadow_container.drop_shadow .shadow_right {
+  float:left;
+	width:19px;
+  margin-left:-19px
+}  
+
+.shadow_container.drop_shadow .shadow_left {
+  float:left;
+  margin-left:-100%;
+ 	width:19px;
+}
+
+.shadow_container.drop_shadow .se_shadow {
+  background:url(drop_shadow/se.png);
+  height:19px;   
+}
+
+.shadow_container.drop_shadow .s_shadow {
+  background:url(drop_shadow/s.png);
+  height:19px;
+  margin: 0 19px;
+}
+
+.shadow_container.drop_shadow .sw_shadow {
+  background:url(drop_shadow/sw.png);
+  height:19px;
+}
+
+.shadow_container.drop_shadow .ne_shadow {
+  background:url(drop_shadow/ne.png);
+  height:19px;
+}
+
+.shadow_container.drop_shadow .n_shadow {
+  background:url(drop_shadow/n.png);
+  height:19px; 
+  margin: 0 19px;
+}
+
+.shadow_container.drop_shadow .nw_shadow {
+  background:url(drop_shadow/nw.png);
+  height:19px;
+}
+
+.shadow_container.drop_shadow .e_shadow {
+  background:url(drop_shadow/e.png) repeat-y;
+  height:100%;
+}
+
+.shadow_container.drop_shadow .w_shadow {
+  background:url(drop_shadow/w.png) repeat-y;
+  height:100%;
+}
+
+.shadow_container.drop_shadow .c_shadow {
+  height:100%;               
+  /* Padding is used to set shift values for unfocused window */
+  padding: 20px 12px 12px 16px;
+  /* Maring is used to set shift values for focused window */
+  margin: 20px 7px 6px 16px; 
+}
+        
+html {
+  filter: expression(document.execCommand("BackgroundImageCache", false, true));
+}
+
+
+

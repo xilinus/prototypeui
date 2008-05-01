@@ -1,0 +1,32 @@
+/* GENERAL STYLES */
+
+.menu {
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-family: verdana;
+}
+.menu a {
+	display: block;
+	text-decoration: none;
+	cursor: default;
+	outline: none;
+	font-size: 11px;
+}
+.menu .separator {
+	height: 1px;
+	padding: 0;
+	overflow: hidden;
+	display: block;
+}
+.menu ul, .menu li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.menu .submenu {
+  position: relative;
+}
+.menu .submenu .menu {
+  position: absolute;
+}

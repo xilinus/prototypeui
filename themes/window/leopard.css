@@ -1,0 +1,182 @@
+.leopard .nw {
+	background:transparent url(leopard/top_unactive.gif) no-repeat scroll 0px 0px;
+	height:22px;
+	padding-left:10px;
+}      
+
+.leopard_focused .nw {
+	background:transparent url(leopard/top.gif) no-repeat scroll 0px 0px !important;
+}       
+
+.leopard .ne {
+	background:transparent url(leopard/top_unactive.gif) no-repeat scroll right -44px;
+	height:22px;
+	padding-right:10px;
+}
+
+.leopard_focused .ne {
+	background:transparent url(leopard/top.gif) no-repeat scroll right -44px !important;
+}
+
+.leopard .n {
+	background:transparent url(leopard/top_unactive.gif) repeat-x scroll right -22px;
+	color:#17385B;
+	font:normal 14px/26px Arial, sans-serif;
+	height:22px;
+	margin:0;
+	padding:0;
+	text-align:center;
+	overflow: hidden;
+	padding-left:60px;
+	line-height: 20px; 
+	color: #000;
+}
+
+.leopard_focused .n {
+	background:transparent url(leopard/top.gif) repeat-x scroll right -22px !important;
+}
+
+.leopard .content {
+	background:#FFF;
+	color:#000;
+	font:normal 12px/1em Verdana, Arial, sans-serif;
+	overflow:auto;
+}
+
+.leopard .w {
+	border-left:1px solid #DDD;
+	border-right:1px solid #DDD;
+}
+
+.leopard .e {
+	border-left:1px solid #EEE;
+	border-right:1px solid #EEE;
+}
+
+.leopard .sw {
+	background:transparent url(leopard/bottom_unactive.gif) no-repeat scroll 0 0px;
+	font-size:2px;
+	height:22px;
+	padding-left:25px;
+}
+
+.leopard_focused .sw {
+	background:transparent url(leopard/bottom.gif) no-repeat scroll 0 0px !important;
+}
+
+.leopard .se {
+	background:transparent url(leopard/bottom_unactive.gif) no-repeat scroll right -44px;
+	font-size:2px;
+	height:22px;
+	padding-right:25px;
+}
+
+.leopard_focused .se {
+	background:transparent url(leopard/bottom.gif) no-repeat scroll right -44px !important;
+}
+
+.leopard .se_resize_handle {
+	background:transparent url(leopard/bottom_unactive.gif) no-repeat scroll right -66px;
+	font-size:2px;
+	height:22px;
+	padding-right:25px;
+}
+      
+.leopard_focused .se_resize_handle {
+	background:transparent url(leopard/bottom.gif) no-repeat scroll right -66px !important;
+}
+
+.leopard .s {
+	background:transparent url(leopard/bottom_unactive.gif) repeat-x scroll 0 -22px;
+	font-size:12px;
+	line-height: 22px;
+	height:22px;
+	overflow:hidden;
+} 
+
+.leopard .se_sizer { 
+  width:22px;
+  height:22px;
+}          
+
+.leopard_focused .s {
+	background:transparent url(leopard/bottom.gif) repeat-x scroll 0 -22px !important;
+}
+
+.leopard .buttons {
+  position: absolute;
+  top:1px;
+  left:7px;
+  height: 20px;   
+}
+
+.leopard .buttons a.close {
+  float:left;
+	background:transparent url(leopard/button_unactive.gif) no-repeat 0 0;
+	height:15px;
+	width:14px;
+	margin: 2px 7px 0 0px;  
+	padding-top:0px; /* padding-top = buttons order, it will be reset to 0, do not use padding, use margin*/ 
+	overflow:hidden;
+}
+  
+.leopard_focused .buttons a.close {
+	background:transparent url(leopard/buttons.gif) no-repeat 0 0 !important;    
+}
+
+.leopard .buttons.over a.close {
+	background:transparent url(leopard/buttons_over.gif) no-repeat 0 0px !important; 
+}
+
+.leopard .buttons a.maximize {
+  float:left;
+	background:transparent url(leopard/button_unactive.gif) no-repeat 0 0;
+	height:15px;
+	width:14px;
+	margin: 2px 7px 0 0;
+	padding-top:2px; /* padding-top = buttons order, it will be reset to 0, do not use padding, use margin*/ 
+	overflow:hidden;
+}
+  
+.leopard_focused .buttons a.maximize {
+	background:transparent url(leopard/buttons.gif) no-repeat 0 -30px !important;
+}
+
+.leopard .buttons.over a.maximize {
+	background:transparent url(leopard/buttons_over.gif) no-repeat 0 -30px !important;  
+}
+
+.leopard .buttons a.minimize {
+  float:left;
+	background:transparent url(leopard/button_unactive.gif) no-repeat 0 0;
+	height:15px;
+	width:14px;
+	margin: 2px 7px 0 0;
+	padding-top:1px; /* padding-top = buttons order, it will be reset to 0, do not use padding, use margin*/ 
+	overflow:hidden;
+}  
+
+.leopard_focused .buttons a.minimize {
+	background:transparent url(leopard/buttons.gif) no-repeat 0 -15px !important;
+}
+
+.leopard .buttons.over a.minimize {
+	background:transparent url(leopard/buttons_over.gif) no-repeat 0 -15px !important;
+}
+
+.leopard .buttons a.minimize.disabled, .leopard .buttons.over a.minimize_disabled  {
+	background:transparent url(leopard/button_unactive.gif) no-repeat 0 0  !important; 
+}
+
+.leopard_overlay {
+	position:absolute;
+	top:0;            
+	left:0;
+	width:100%;
+	background-color:#DDD;
+	filter:alpha(opacity=60);
+	opacity: 0.6;
+	-moz-opacity: 0.6;
+}
+
+

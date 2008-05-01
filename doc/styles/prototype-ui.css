@@ -1,0 +1,134 @@
+body {
+  font-family: "Lucida Grande", Arial, Tahoma;
+}
+
+p {
+  text-indent: 0px;
+  margin-bottom:10px;
+}
+
+.Summary {
+  margin-left:0;
+}
+td.MenuSection {
+  background: transparent url(../images/leftcol_bg.png) repeat-y right top;
+  width: 200px;
+  padding: 0 10px 0 0;
+}        
+
+.ContentSection {
+  border:none;
+}                  
+
+#MainTopic .CTitle, h3.CTitle {
+  background:#FFF;
+  color:#89C400; 
+  border: none;
+}                
+   
+.CTitle { 
+  border-bottom: 1px solid #DDD !important; 
+}
+
+.CGroup .CTitle {
+  color: #0060A6 !important;    
+  margin-top:10px;
+  
+} 
+
+.Gecko .SBorder, .Gecko .MGroup #MSelected,  .Gecko #MSelected{ 
+  -moz-border-radius: 0
+}            
+
+#MSelected {
+  border:none;  
+  background: #a8e2ff;
+}           
+
+pre.CCode {
+  padding: 5px;
+}                 
+
+.CHeading {
+  margin-bottom:0;
+}
+
+p.CParagraph {
+  margin-left: 35px;
+}        
+
+.CDLEntry {
+  padding: 2px 0 0 0 ;
+}             
+   
+.CDLDescription {
+  padding-bottom:0;
+}                    
+
+.CHeading {
+  margin-top:10px;
+}
+
+.CTopic {
+  padding-bottom:0 !important;
+}               
+
+h2.CTitle {
+  float:left;
+  width:96%;     
+  padding: 2%;
+}            
+
+.CClass .CTitle {
+  border:none;
+}
+.CProperty h4, .CProperty blockquote {
+  margin-left: -200px !important;  
+  width:100% !important;
+}
+div.CProperty h3.CTitle {
+  width: 16%;   
+  float:left;
+  margin:0 2%;
+  padding:0;
+  border: none !important;    
+  color: #000;
+  font-size: 14px;
+}
+
+div.CProperty .CBody {
+  width: 80%;
+  float:left;
+  margin:0;
+  padding:0;
+}
+  
+div.CProperty, div.CProperty .CTopic {
+  padding: 0;
+  margin:0;
+}           
+
+div.CFunction {
+  width: 100%;
+  float:left;   
+  margin-top: 5px;
+}
+.clear {
+  clear:both;
+}
+
+.CBody:after {
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+}
+
+.CBody {display: inline-block;}
+
+/* Hides from IE-mac \*/
+* html .CBody {height: 1%;}
+.CBody {display: block;}
+/* End hide from IE-mac */
+

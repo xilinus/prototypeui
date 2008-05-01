@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>PWC unit test</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="../assets/test.css" type="text/css" />
+
+  <script src="../../lib/prototype.js" type="text/javascript"></script>
+  <script src="../lib/unittest.js" type="text/javascript"></script>
+  <script src="../../dist/prototype-ui.js" type="text/javascript"></script>
+</head>
+<body>
+
+<div id="content">
+
+  <div id="header">
+    <h1>PWC unit test file</h1>
+    <p>
+      This file tests UI.Options object from <strong>src/options.js</strong>.
+    </p>
+  </div>
+
+  <!-- Log output -->
+  <div id="testlog"> </div>
+
+</div>
+
+<script type="text/javascript">
+// <![CDATA[
+
+  var Widget = Class.create(UI.Options, {
+    options: {
+      left: 20,
+      top: 10,
+      width: 200,
+      height: 100
+    },
+    
+    initialize: function(options){
+      this.setOptions(options);
+    }
+  });
+  
+  Widget.optionsAccessor('width', 'height');
+  Widget.optionsAccessor($w('top left'));
+  
+  var SubWidget = Class.create(Widget, {
+    options: {
+      sub: true
+    }
+  })
+
+  new Test.Unit.Runner({
+    setup: function() {
+    },
+
+    teardown: function() {
+    },
+    
+    testDefaultOptions: function(){with(this){
+      assertHashEqual(Widget.prototype.options, new Widget().options);
+      assertNotIdentical(Widget.prototype.options, new Widget().options);
+    }},
+    
+    testOptionsInheritance: function(){with(this){
+      assert(!Widget.prototype.options.sub);
+      assert(!SubWidget.prototype.options.top);
+      
+      assertHashEqual({
+          width: 200,
+          height: 100,
+          left: 100,
+          top: 100,
+          sub: true
+      }, new SubWidget({ left: 100,  top: 100 }).options);
+    }},
+    
+    testAllOptions: function(){with(this){
+      assertHashEqual({
+        width: 200,
+        height: 100,
+        left: 20,
+        top: 10,
+        sub: true
+      }, SubWidget.prototype.allOptions());
+    }},
+
+    testOptionsAccessor: function(){with(this){
+      var widget = new Widget();
+      assertEqual(200, widget.getWidth());
+      assertEqual(100, widget.getHeight());
+      assertEqual(200, widget.getWidth());
+      assertEqual(100, widget.getHeight());
+      
+      widget.setWidth(1);
+      widget.setHeight(2);
+      widget.setTop(3);
+      widget.setLeft(4);
+      
+      assertEqual(1, widget.getWidth());
+      assertEqual(2, widget.getHeight());
+      assertEqual(3, widget.getTop());
+      assertEqual(4, widget.getLeft());
+    }}
+    
+  }, "testlog");
+// ]]>
+</script>
+</body>
+</html>

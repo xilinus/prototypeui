@@ -1,0 +1,144 @@
+/* Horizontal Carousel */
+#horizontal_carousel {
+  float: left;
+  width: 610px;
+  height: 240px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+#horizontal_carousel .container {
+  float: left;
+  width: 500px;
+  height: 240px;
+  position: relative;    
+  overflow: hidden;
+}
+
+#horizontal_carousel ul {
+  margin: 0;
+  padding:0;
+  width: 100000px;
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 240px;
+}                      
+
+#horizontal_carousel ul li {
+  width: 250px;
+  height: 240px;
+  text-align: center; 
+  list-style:none;   
+  float:left;
+}
+
+#horizontal_carousel .previous_button {
+  float:left;  
+  width: 32px;
+  height: 175px;
+  background: url(prototype-ui/horizontal/left.png);
+  z-index: 100;
+  cursor: pointer;
+}
+
+#horizontal_carousel .previous_button_over {
+  background: url(prototype-ui/horizontal/left_over.png);
+}
+
+#horizontal_carousel .previous_button_disabled {
+  background: url(prototype-ui/horizontal/left_disabled.png);
+  cursor: default;
+}
+
+#horizontal_carousel .next_button {
+  float:left;  
+  width: 32px;
+  height: 175px;
+  background: url(prototype-ui/horizontal/right.png);
+  z-index: 100;
+  cursor: pointer;
+}
+
+#horizontal_carousel .next_button_over {
+  background: url(prototype-ui/horizontal/right_over.png);
+}
+
+#horizontal_carousel .next_button_disabled {
+  background: url(prototype-ui/horizontal/right_disabled.png);
+  cursor: default;
+}
+
+
+/* vertical Carousel */
+#vertical_carousel {
+  float:left;
+  width: 350px;
+  height: 270px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+#vertical_carousel .container {
+  position: relative;   
+  float:left;
+  width: 260px;
+  height: 240px;
+  overflow: hidden;
+}
+
+#vertical_carousel ul {
+  margin: 0;
+  padding:0;
+  height: 100000px;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+#vertical_carousel ul li {
+  width: 260px;
+  height: 240px;
+  text-align: center;      
+  list-style:none;   
+  float:left;
+}                         
+
+#vertical_carousel .previous_button {
+  float:left;
+  height: 32px;
+  width: 175px;
+  background: url(prototype-ui/vertical/left.png);
+  cursor: pointer;    
+  display:inline;
+  margin: 0 0 10px 40px;
+}
+
+#vertical_carousel .previous_button_over {
+  background: url(prototype-ui/vertical/left_over.png);
+}
+
+#vertical_carousel .previous_button_disabled {
+  background: url(prototype-ui/vertical/left_disabled.png);
+  cursor: default;
+}
+
+#vertical_carousel .next_button {
+  float:left;
+  height: 32px;
+  width: 175px;
+  background: url(prototype-ui/vertical/right.png);
+  display:inline;
+  margin-left: 40px;
+  cursor: pointer;
+}
+
+#vertical_carousel .next_button_over {
+  background: url(prototype-ui/vertical/right_over.png);
+}
+
+#vertical_carousel .next_button_disabled {
+  background: url(prototype-ui/vertical/right_disabled.png);
+  cursor: default;
+}
+

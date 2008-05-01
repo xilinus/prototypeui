@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>Test Shadow Class</title>
+  <script src="../../../lib/prototype.js" type="text/javascript"></script>
+  <script src="../../../dist/util.js" type="text/javascript"></script>
+  <script type="text/javascript" charset="utf-8">
+    document.observe('state:changed', function(e) {
+      $('state').update(e.memo.value);
+      alert('state changed : '+Object.inspect(e.memo.value)+' ("null" means initial)');
+    });
+  </script>
+</head>
+<body>
+  <p>Current state: <span id="state"></span></p>
+  <p>Try switching state and then use back/forward browser buttons.</p>
+  <p>Try bookmarking a given state.</p>
+  <p>
+    Switch to:
+    <ul>
+      <li><a href="#" onclick="UI.State.change('one'); return false">State one</a></li>
+      <li><a href="#" onclick="UI.State.change('two'); return false">State two</a></li>
+      <li><a href="#" onclick="UI.State.change('three'); return false">State three</a></li>
+      <li><a href="#top">Classic link with hash</a></li>
+    </ul>
+  </p>
+</body>
+</html>

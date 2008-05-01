@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>Test Theme</title>
+  <script src="../../../lib/prototype.js" type="text/javascript"></script>
+  <script src="../../../lib/effects.js" type="text/javascript"></script>
+  <script src="../../../dist/window.js" type="text/javascript"></script>      
+  <link href="../../../themes/window/window.css" rel="stylesheet" type="text/css">
+  <link href="../../../themes/window/mac_os_x.css" rel="stylesheet" type="text/css">
+  <link href="../../../themes/shadow/mac_shadow.css" rel="stylesheet" type="text/css">
+  
+  <style type='text/css'>
+  body { 
+    background: url('../../assets/body_bg.png') repeat;  
+    overflow:hidden;
+  }
+  </style>
+  
+</head>
+<body>     
+<a href="#" onclick="expose()">Restart expose</a> 
+<script type="text/javascript"> 
+  function expose() {      
+    var wm = UI.defaultWM;
+    var windows = wm.windows();
+    var area = wm.viewport.getDimensions();
+    var nbRows = Math.ceil(Math.sqrt(windows.length));   
+    var nbCols = nbRows;
+    var nbColslInLastRow = nbCols - (nbRows * nbCols - windows.length);  
+    if (nbColslInLastRow<0) {
+      nbRows--;nbColslInLastRow = nbCols - (nbRows * nbCols - windows.length);  
+    }
+    var shadowSize = Object.clone(windows.first().shadow.shadowSize); 
+    shadowSize.top -= windows.first().shadow.unfocusedShadowShift.top;
+    shadowSize.left -= windows.first().shadow.unfocusedShadowShift.left;
+    shadowSize.width -= windows.first().shadow.unfocusedShadowShift.width;
+    shadowSize.height -= windows.first().shadow.unfocusedShadowShift.height;
+    
+    var currentRow = 0, currentCol = 0, top = 0 , left = 0;
+    var height = area.height / nbRows; 
+
+    windows.each(function(win) {
+      var width = area.width / (currentRow == nbRows - 1 ? nbColslInLastRow : nbCols);
+      win.savedBounds = win.getBounds();       
+      win.morph({top: top + shadowSize.top, left: left + shadowSize.left, width: width - shadowSize.width, height: height - shadowSize.height});
+      currentCol++; 
+      left += width;        
+      if (currentCol >= nbCols) {
+        currentCol = 0;
+        currentRow++;
+        left = 0;
+        top += height;
+      }
+    });
+        
+    unexpose.delay(2);
+  }   
+  
+  function unexpose() {
+    var wm = UI.defaultWM;
+    var windows = wm.windows();
+    windows.each(function(win) {
+      win.morph(win.savedBounds);
+    })
+  } 
+  
+  function runTest() {     
+    $R(1,5).each(function(index) {
+      new UI.Window({theme: "mac_os_x", shadow: true}).show(); 
+    });
+    
+   (function() {expose()}).delay(1)
+  }  
+  document.whenReady(runTest);
+</script>
+
+</body>
+</html>
