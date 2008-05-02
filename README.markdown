@@ -22,7 +22,7 @@ Currently, documentation is based on NaturalDocs. To generate hmtl files just tu
 
 > rake doc
 
-## Help
+## Help Wanted
 
 We want to move to [PDoc](http://pdoc.org/) and we need help to write new documentation.
 Nothing has been done yet, only rake tasks.
@@ -39,7 +39,7 @@ then you can generate pdoc files
 
 And open pdoc/index.html to check it. Pretty easy.
 
-To avoid conflicts with current doc, do not includ pdoc comment in current JS file. Edit documentation.pdoc in each component directory.
+To avoid conflicts with current doc, do not includ pdoc comment in current JS file. Edit documentation.pdoc in each component directory (add any new .pdoc file, they will be used in rake pdoc).
 When you're done, pull request :).
 
 Thanks in advance for your help.
