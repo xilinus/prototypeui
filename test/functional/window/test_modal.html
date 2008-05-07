@@ -36,12 +36,23 @@
   	<option>option 2</option>
   	<option>option 3</option>
   </select> 
+  
+  <div id="content">
+    Open Modal window inside a window!
+    <input type="button" value="Open" onclick="openModalInWindow()"/>
+    bla<br/>bla<br/>bla<br/>bla<br/>bla<br/>bla<br/>bla<br/>bla<br/>bla<br/>bla<br/>
+    bla<br/>bla<br/>bla<br/>bla<br/>bla<br/>bla<br/>bla<br/>bla<br/>bla<br/>bla<br/>
+    bla<br/>bla<br/>bla<br/>bla<br/>bla<br/>bla<br/>bla<br/>bla<br/>bla<br/>bla<br/>
+    <input type="button" value="Open" onclick="openModalInWindow()"/>
+  </div>
 <script type="text/javascript">
   //insertDebugControl();
   function runTest() {
     new UI.Window({width: 200, top: 50, left: 110, shadow: true}).show(); 
-    new UI.Window({width: 200, top: 110, left: 210, shadow: true, superflousEffects: false}).show();       
+    new UI.Window({width: 200, top: 110, left: 210, shadow: true, superflousEffects: false}).setContent($("content")).show();       
   	wm = new UI.WindowManager({ container: 'desktop' });
+  	wm2 = new UI.WindowManager({ container: $('content').up() });
+  	
 	  new UI.Window({width: 200, top: 10, left: 10, windowManager: wm}).show();  
 	}  
   document.whenReady(runTest);
@@ -64,6 +75,13 @@
   	w.setContent($('link2').innerHTML);
   	w.show(true).focus();  
 		w.observe("hidden", function() {pos.top -= 20; pos.left -= 20})		
+	}
+	
+	function openModalInWindow() {
+  	w = new UI.Window({id: "insideWindow", shadow: true, resizable: false, close: false,
+  	                   top: 10, left: 10, width: 100, minWidth: 100,  height: 50, windowManager: wm2});
+  	w.setContent("<a href='#' onclick='wm2.getWindow(this).destroy()'>Close</a>");
+  	w.center({auto: true}).show(true).focus();  
 	}
 	  
 </script>
