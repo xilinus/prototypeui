@@ -16,12 +16,13 @@
     (http://yuiblog.com/blog/2007/02/21/browser-history-manager/)
     
     Seems to work in Safari 2/3, IE6, Firefox 1.5/2
-    Opera <9.5 isn't supported for now
-    Try UI.State.isSupported() before any attempt...
+    Opera 9.5 is now supported thanks to Terence Johnson.
+    UI.State.isSupported is now the true function !!
     
     Warning: You should need to wait for document to be loaded before using this helper.
     Using document.whenReady is a good way to ensure this.
-    Classic anchors with hash (<a href="#top"> for instance) triggers state:changed on all
+    
+    FIXME: Classic anchors with hash (<a href="#top"> for instance) triggers state:changed on all
     browsers but IE, therefore using those anchors is NOT the good way to switch between states.
     
     Example:
@@ -65,11 +66,17 @@
       
 
 */
-UI.State = (function(browser) {
+(function(browser) {
   var watch, change, changed, fragment;
   
+  // returns fragment part of the URL without "#"
+  // "http://someplace.org/path/to#?something" => "something"
   function getFragment() {
     return top.location.hash.substr(1);
+  }
+  
+  function setFragment(fragment) {
+    top.location.hash = fragment || '';
   }
   
   function fragmentChanged(newFragment) {
@@ -89,6 +96,7 @@ UI.State = (function(browser) {
 
       function writeFragmentToIFrame(fragment) {
         var doc = contentWindow.document;
+        // opening and closing the document will cause IE to add an history entry
         doc.open();
         doc.write(fragment || '');
         doc.close();
@@ -98,12 +106,13 @@ UI.State = (function(browser) {
         return contentWindow.document.body.innerText;
       }    
 
+      // this first call wont add an history entry
       writeFragmentToIFrame(fragment);
       
       watch = function() {
         var newFragment = readFragmentFromIFrame();
         if (newFragment != fragment) {
-          top.location.hash = newFragment || '';
+          setFragment(newFragment);
           fragmentChanged(newFragment);
         }
       };
@@ -118,33 +127,46 @@ UI.State = (function(browser) {
       
       watch = function() {
         var newFragment = getFragment(), newCounter = history.length;
-        if (newFragment != fragment) fragmentChanged(newFragment);
-        else if (newCounter != counter) {
+        
+        if (newFragment != fragment) {
+          fragmentChanged(newFragment);
+
+        } else if (newCounter != counter) {
           fragmentChanged(fragments[newCounter - 1]);
           fragment = newFragment;
         }
+        
         counter = newCounter;
       };
             
       change = function(newFragment) {
-        top.location.hash = newFragment;
-        if (browser.WebKit) fragments[history.length] = newFragment;
+        setFragment(newFragment);
+        
+        if (browser.WebKit) {
+          fragments[history.length] = newFragment;
+        }
       };
     }
-    
-    setInterval(function() {
-      if (changed) watch()
-    }, 50);
   });
   
-  return {
+  UI.State = {
     change: function(value) {
       change(value);
       changed = true;
     },
+        
+    isSupported: Prototype.trueFunction,
     
-    isSupported: function() {
-      return !browser.Opera || navigator.appVersion.match("9.5");
-    }
+    // private method called by Opera < 9.5
+    _watch: function() { watch() }
+  };
+  
+  if (browser.Opera && parseFloat(navigator.appVersion) < 9.5) {
+    // moving in history will cause Opera to try to reload this fake image...
+    // therefore to call UI.State._watch.
+    document.write('<img src="javascript:location.href=\'javascript:UI.State._watch();\';" style="position:absolute; top:-1000px" />');
   }
+  
+  setInterval(function() { if (changed) watch() }, 50);
+  
 })(Prototype.Browser);

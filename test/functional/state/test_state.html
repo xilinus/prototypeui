@@ -9,7 +9,7 @@
   <script type="text/javascript" charset="utf-8">
     document.observe('state:changed', function(e) {
       $('state').update(e.memo.value);
-      alert('state changed : '+Object.inspect(e.memo.value)+' ("null" means initial)');
+      alert('state changed : '+Object.inspect(e.memo.value)+' (empty means initial)');
     });
   </script>
 </head>
