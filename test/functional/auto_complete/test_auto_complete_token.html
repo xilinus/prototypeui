@@ -32,10 +32,10 @@
     <script  type="text/javascript">
     Event.observe(window, "load", function() {
       ac = new UI.AutoComplete('pui-demo', { shadow:             "auto_complete",
-                                             tokens:             [",", " "],
+                                             tokens:             Event.KEY_COMA,
                                              max:                {selection: 10, selected:5} 
                                              }).init();
-      ac.observe('input:empty',           function(event) {event.memo.autocomplete.showMessage("Enter tags separated by coma or space")})
+      ac.observe('input:empty',           function(event) {event.memo.autocomplete.showMessage("Enter tags separated by coma")})
         .observe('selection:max_reached', function(event) {event.memo.autocomplete.showMessage("5 tags maximum")})
         .observe('selection:empty',       function(event) {event.memo.autocomplete.showMessage("Nothing match")})
       
