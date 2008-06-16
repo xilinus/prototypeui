@@ -7,7 +7,7 @@
 
 Object.extend(Event, {
   KEY_SPACE: 32,
-  KEY_COMA:  188,
+  KEY_COMA:  188
 });
 
 UI.AutoComplete = Class.create(UI.Options, {
