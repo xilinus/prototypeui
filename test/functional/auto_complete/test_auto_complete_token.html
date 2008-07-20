@@ -30,7 +30,7 @@
     </form>         
     <br/><br/>
     <script  type="text/javascript">
-    document.whenReady(function() {
+    Event.observe(window, 'load', function() {
       ac = new UI.AutoComplete('pui-demo', { shadow:             "auto_complete",
                                              tokens:             Event.KEY_COMA,
                                              max:                {selection: 10, selected:5} 

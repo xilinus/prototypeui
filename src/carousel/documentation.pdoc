@@ -3,4 +3,18 @@
  * The Carousel section
  **/
 
+/** section: Carousel
+ * Carousel
+ *  
+ *  blablabla
+ **/
+
+/** section: Carousel
+  * new UI.Carousel(element, options)
+  * the Ajax Request constructor
+  **/
+  
+/** section: Carousel
+ *  class UI.Carousel
+ **/
 

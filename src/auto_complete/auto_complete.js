@@ -21,7 +21,7 @@ UI.AutoComplete = Class.create(UI.Options, {
     delay: 0.2,                            // Delay before running ajax request
     shadow: false,                         // Shadow theme name (false = no shadow)
     highlight: false,                      // Highlight search string in list
-    tokens: false,                         // Tokens used to automatically adds a new entry (ex tokens:[',', ' '] for coma and spaces)
+    tokens: false,                         // Tokens used to automatically adds a new entry (ex tokens:[KEY_COMA, KEY_SPACE] for coma and spaces)
     unique: true                           // Do not display in suggestion a selected value
   }, 
   
@@ -515,20 +515,29 @@ UI.AutoComplete = Class.create(UI.Options, {
   updateSelectedText: function() {
     var selected = this.container.select("li." + this.getClassName("box"));
     var content = selected.collect(function(element) {return element.down("span").firstChild.textContent});
-    var separator = this.options.tokens ? this.options.tokens.first() : " ";
+    var separator = this.getSeparatorChar();
     this.selectedText = content.empty() ? false : content.join(separator); 
     
     return this;
   },
   
   updateHiddenField: function() {
-    var separator = this.options.tokens ? this.options.tokens.first() : " ";
+    var separator = this.getSeparatorChar();
     this.hidden.value = this.selectedText ? $A([this.selectedText, this.input.value]).join(separator) : this.input.value;
   },
   
   selectedValues: function() {
     var selected = this.container.select("li." + this.getClassName("box"));
     return  selected.collect(function(element) {return element.readAttribute("pui-autocomplete:value")});
+  },
+  
+  getSeparatorChar: function() {
+    var separator = this.options.tokens ? this.options.tokens.first() : " ";
+    if (separator == Event.KEY_COMA)
+      separator = ',';
+    if (separator == Event.KEY_SPACE)
+      separator = ' ';
+    return separator;
   }
 });
 

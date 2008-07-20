@@ -36,7 +36,7 @@ var CSS = (function() {
   };
 
   // Fixes a stylesheet
-  function fixStylesheet(stylesheet, method) {
+  function fixStylesheet(stylesheet, method) {    
     // Parse import files
     if (stylesheet.imports)
       $A(stylesheet.imports).each(fixStylesheet);
@@ -119,6 +119,10 @@ var CSS = (function() {
     },
 
     preloadImages: function() {  
+      // Does not work with FF3!!
+      if (navigator.userAgent.match(/Firefox\/3/))
+        return;
+        
       parseStylesheet.apply(this, $A(arguments).concat(preloadRule));
     }
   };
